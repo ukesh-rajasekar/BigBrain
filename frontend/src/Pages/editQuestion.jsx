@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import QuestionInput from '../Components/questionInput'
+import Button from '../Components/button'
 
 const defaultDetails = {
   question: {
@@ -39,6 +40,19 @@ const defaultDetails = {
     questionLabel: 'Enter the youtube UR',
     value: '',
   },
+  answer: {
+    name: 'answer',
+    type: 'text',
+    title: '',
+    questionLabel: 'Enter the answer',
+    value: '',
+    constrains: {
+      length: {
+        min: 2,
+        max: 6
+      }
+    }
+  },
 }
 
 // Generate new deep copy of the object
@@ -48,32 +62,47 @@ const getNewObject = (obj) => {
 
 const EditQuestion = (props) => {
   const { gameId = 0, questionId = 0, questionDetails = defaultDetails } = props
-
+  const [newDetails, setNewDetails] = useState(getNewObject(questionDetails))
   const [currentDetails, setCurrentDetails] = useState(
     getNewObject(defaultDetails)
   )
+
   // Set the initial value for resetting if needed
   useEffect(() => {
     setCurrentDetails(Object.assign({}, questionDetails))
   }, [])
 
-  const [newDetails, setNewDetails] = useState(getNewObject(questionDetails))
   // Update the details when user chages the values
   const handleChange = (item, value) => {
     const tempDetails = { ...newDetails }
+    if (tempDetails[item]?.constrains?.length) {
+      const { max } = tempDetails[item]?.constrains?.length
+      if (value.length > max) return
+    }
     tempDetails[item].value = value
     setNewDetails({ ...getNewObject(tempDetails) })
-    console.log(currentDetails[item].value)
-    console.log(newDetails[item].value)
   }
+  const handleSave = () => {
+    console.log(newDetails);
+    const answer = newDetails.answer
+    const { min, max } = answer?.constrains?.length
+    if (answer.value.length > max || answer.value.length < min) { alert('Answer should be of length between 2 and 6 character') } else {
+      saveChanges(newDetails)
+    }
+  }
+
+  const saveChanges = (data) => {
+    console.log('save changes');
+    return null
+  }
+
   // Reset the item specified
   const reset = (item) => {
     const tempDetails = { ...newDetails }
-    console.log(currentDetails)
     tempDetails[item].value = currentDetails[item].value
-
     setNewDetails({ ...getNewObject(tempDetails) })
   }
+
   return (
     <div className='wrapper'>
       <div className='container'>
@@ -84,7 +113,6 @@ const EditQuestion = (props) => {
         <div className='questionDetails'>
           {/* Generate question inputs as needed */}
           {Object.entries(newDetails).map(([key, value]) => {
-            console.log(value)
             return (
               <QuestionInput
                 key={key}
@@ -94,6 +122,7 @@ const EditQuestion = (props) => {
               />
             )
           })}
+            <Button buttonText="Save changes" buttonAction={() => handleSave()} />
         </div>
       </div>
     </div>
@@ -104,6 +133,7 @@ EditQuestion.propTypes = {
   gameId: PropTypes.string,
   questionId: PropTypes.string,
   questionDetails: PropTypes.object,
+  saveChanges: PropTypes.func
 }
 
 export default EditQuestion
