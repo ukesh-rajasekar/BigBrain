@@ -3,21 +3,31 @@ import Button from '../Components/button'
 import Input from '../Components/Input'
 import Navbar from '../Components/navbar'
 import { doPost } from '../services/apiService'
-import { fetchAllGames } from '../services/gamesService'
+import { fetchAllGames, fetchAllGamesByIds } from '../services/gamesService'
 import { urls } from '../services/links'
 import { showToast } from '../services/toastService'
 
 export default function home () {
   const [gameName, setgameName] = useState(false)
   const [formValues, setForm] = useState({ name: '' })
-  const [games] = useState({ })
-
-  useEffect(() => {
-    const fetchGames = () => {
-      fetchAllGames().then((data) => {
-        console.log('homeData', data);
+  const [games, setGames] = useState({ })
+  const fetchGames = () => {
+    fetchAllGames().then((data) => {
+      const ids = []
+      for (const quiz of data.quizzes) {
+        ids.push(quiz.id)
+      }
+      fetchAllGamesByIds(ids).then((values) => {
+        const games = []
+        for (const value of values) {
+          const gameDetails = value.value
+          games.push(gameDetails)
+        }
+        setGames(games)
       })
-    }
+    })
+  }
+  useEffect(() => {
     fetchGames()
     return () => {
 
@@ -33,6 +43,7 @@ export default function home () {
       if (res.status === 200) {
         res.json().then((data) => {
           showToast(`Game ${formValues.name} created`, 'success')
+          fetchGames()
         })
       } else {
         showToast('Failed to create game, check input', 'error')
@@ -57,7 +68,7 @@ export default function home () {
         <div className="gamesWrapper">
           <div className="gamesContainer">
             {Object.entries(games).map((value) => {
-              return console.log(value)
+              return <h3 key={value[0]}>{value[1].name}</h3>
             }) }
           </div>
         </div>
