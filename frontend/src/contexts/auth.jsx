@@ -4,18 +4,6 @@ import PropTypes from 'prop-types'
 
 export const AuthContext = createContext()
 
-const fakeAuth = {
-  isAuthenticated: true,
-  signin (cb) {
-    fakeAuth.isAuthenticated = true;
-    setTimeout(cb, 100); // fake async
-  },
-  signout (cb) {
-    fakeAuth.isAuthenticated = false;
-    setTimeout(cb, 100);
-  }
-};
-
 export function ProvideAuth ({ children }) {
   const auth = useProvideAuth()
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>
@@ -37,17 +25,14 @@ function useProvideAuth () {
     setUserToken(token)
   }
 
-  const signout = (cb) => {
-    return fakeAuth.signout(() => {
-      setUserToken(null)
-      cb()
-    })
+  const signOut = (cb) => {
+    setUserToken(null)
   }
 
   return {
     userToken,
     signin,
-    signout,
+    signOut,
   }
 }
 
