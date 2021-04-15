@@ -8,24 +8,14 @@ import { showToast } from '../services/toastService'
 // import { Redirect } from 'react-router-dom';
 
 const Login = () => {
-  const [email, setemail] = useState('')
-  const [password, setpassword] = useState('')
+  const [formValues, setForm] = useState({ email: '', password: '' })
 
   const setStateValue = (item, value) => {
-    console.log(item, value)
-    switch (item) {
-      case 'email':
-        setemail(value)
-        break
-      case 'password':
-        setpassword(value)
-        break
-    }
+    setForm({ ...formValues, [item]: value })
   }
 
   const onsubmit = () => {
-    console.log(email, password)
-    doPost(urls.login, { email: email, password: password }).then((res) => {
+    doPost(urls.login, formValues).then((res) => {
       if (res.status === 200) {
         res.json().then((data) => {
           showToast('login Success', 'success')

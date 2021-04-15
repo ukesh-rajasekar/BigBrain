@@ -1,24 +1,19 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import Input from '../Components/Input'
 import Button from '../Components/button'
 import { doPost } from '../services/apiService';
 import { urls } from '../services/links';
 import { showToast } from '../services/toastService';
 
-export default class Registration extends Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      email: '',
-      name: '',
-      password: ''
-    }
-    this.setStateValue = this.setStateValue.bind(this)
+const Registration = () => {
+  const [formValues, setForm] = useState({ email: '', password: '', name: '' })
+
+  const setStateValue = (item, value) => {
+    setForm({ ...formValues, [item]: value })
   }
 
-  onsubmit = () => {
-    const { email, password, name } = this.state
-    doPost(urls.register, { email: email, password: password, name: name })
+  const onsubmit = () => {
+    doPost(urls.register, formValues)
       .then((res) => {
         if (res.status === 200) {
           showToast('registration successful', 'success')
@@ -29,23 +24,17 @@ export default class Registration extends Component {
       )
   }
 
-  setStateValue (item, value) {
-    this.setState((state) => {
-      return { [item]: value };
-    })
-  }
-
-  render () {
-    return (
+  return (
       <div className="wrapper">
         <div className="container">
           <p className="header">Welcome</p>
-            <Input name="name" placeholder= "name" className= "name" type="text" handleChange={this.setStateValue}/>
-            <Input name="email" placeholder= "Email" className= "email" type="text" handleChange={this.setStateValue}/>
-            <Input name="password" placeholder= "Password" className= "password" type="password" handleChange={this.setStateValue}/>
-            <Button buttonText="Register" buttonAction={this.onsubmit}/>
+            <Input name="name" placeholder= "name" className= "name" type="text" handleChange={setStateValue}/>
+            <Input name="email" placeholder= "Email" className= "email" type="text" handleChange={setStateValue}/>
+            <Input name="password" placeholder= "Password" className= "password" type="password" handleChange={setStateValue}/>
+            <Button buttonText="Register" buttonAction={onsubmit}/>
         </div>
       </div>
-    )
-  }
+  )
 }
+
+export default Registration
