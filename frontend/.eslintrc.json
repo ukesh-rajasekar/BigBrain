@@ -22,8 +22,22 @@
     ],
     "rules": {
         "linebreak-style": 0,
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ],
         "semi": 0,
         "comma-dangle": 0
-    }
+    },
+    "settings": {
+        "react": {
+            "versions": "17.0.1"
+        }
+    },
+    "parser": "babel-eslint"
 }
