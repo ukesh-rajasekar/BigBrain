@@ -1,0 +1,16 @@
+{
+  "tabWidth": 2,
+  "useTabs": false,
+  "overrides": [
+    {
+      "files": ["*.js","*.jsx"],
+      "options": {
+        "semi": false,
+        "singleQuote": true,
+        "jsxSingleQuote": true,
+        "bracketSpacing": true
+        
+      }
+    }]
+   
+}
