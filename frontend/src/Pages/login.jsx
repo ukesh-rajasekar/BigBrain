@@ -8,7 +8,7 @@ import { AuthContext } from '../contexts/auth'
 import { RouteContext } from '../services/routingService'
 // import { Redirect, useLocation, withRouter } from 'react-router'
 
-const Login = () => {
+export const Login = () => {
   const [formValues, setForm] = useState({ email: '', password: '' })
   // const loc = useLocation()
   const auth = useContext(AuthContext)
@@ -23,6 +23,8 @@ const Login = () => {
       if (res.status === 200) {
         res.json().then((data) => {
           showToast('login Success', 'success')
+          console.log(sessionStorage)
+          console.log(data)
           auth.signin(data)
           route.redirectTo('/home')
         })
@@ -57,4 +59,4 @@ const Login = () => {
   )
 }
 
-export default Login
+// export default Login

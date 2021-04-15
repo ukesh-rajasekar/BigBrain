@@ -23,10 +23,12 @@ function useProvideAuth () {
   const signin = (data) => {
     const { token } = data
     setUserToken(token)
+    sessionStorage.setItem('Token', token)
   }
 
   const signOut = (cb) => {
     setUserToken(null)
+    sessionStorage.removeItem('Token');
   }
 
   return {
