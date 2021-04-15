@@ -1,11 +1,4 @@
 
-bonus: 
-	confirm password, 
-	feedbacks: succesfull registration, failed registration
-	input validation for 
-		login
-		registration
-
 
 Things to keep in mind:
 	CSS clashing
@@ -36,4 +29,36 @@ components:
 	
 			
 	
+=> 2.2 Admin Creating & Editing a Game
+1. Dashboard
+	unique route
+	Display all games
+		each game has
+			Title
+			number of questions
+			thumbnail
+			totat time required	
+		action: onclick - takes a game page to edit it
+	action: create a games( button to create a game with name)
+	feedbacks: new game displayed there itself, added new game toast, failed to add new game
+
+	2. Edit game:
+		Unique route
+			parameter: game Id
+		actions:
+			select questions to edit
+			delete questions
+			add new question
+		feedbacks: removing the deleted game and showing toast
+					added new game toast and new game shows up
 	
+	3. Edit game question:
+		unique route:
+			parameter: Game ID, question ID
+		editable items:
+			type[ multiple, single choice]
+			question itself: string
+			time limit
+			each questions points
+			add url: string
+			answer: string of length 2 to 6
