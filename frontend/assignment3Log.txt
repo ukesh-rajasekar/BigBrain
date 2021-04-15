@@ -1,0 +1,39 @@
+
+bonus: 
+	confirm password, 
+	feedbacks: succesfull registration, failed registration
+	input validation for 
+		login
+		registration
+
+
+Things to keep in mind:
+	CSS clashing
+	
+=> 2.1 admin auth
+1. Login screen
+	route to screen
+	inputs: email and password
+	actions: login
+	feedbacks: succesfull login, failed login
+	
+	
+2. Register
+	route to screen
+	inputs: email, password and name
+	actions: login
+	
+	
+3. Home screen
+	route to screen
+	action: logout
+pages: login, registration, home screen
+components: 
+	form
+		input fields
+	button
+	toasts for feedbacks
+	
+			
+	
+	
