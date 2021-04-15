@@ -54,7 +54,6 @@ function useProvideAuth () {
 export const PrivateRoute = ({ children, ...rest }) => {
   const auth = useAuth()
   const loc = useLocation()
-  console.log(auth.userToken)
   if (auth.userToken) {
     return <Route
     {...rest}

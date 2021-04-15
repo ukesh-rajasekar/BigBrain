@@ -1,5 +1,5 @@
 import React from 'react'
-import { Redirect } from 'react-router'
+import { useHistory } from 'react-router'
 import PropTypes from 'prop-types'
 
 export const RouteContext = React.createContext()
@@ -17,9 +17,11 @@ RouterService.propTypes = {
 }
 
 function useRouterFunc () {
+  const history = useHistory()
   const redirectTo = (path) => {
-    return <Redirect to={path}/>
+    console.log(path)
+    history.push(path)
   }
 
-  return redirectTo
+  return { redirectTo }
 }

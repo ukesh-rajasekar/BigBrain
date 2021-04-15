@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.css'
 import Home from './Pages/home'
 import Login from './Pages/login'
@@ -17,14 +17,6 @@ function App () {
             <ProvideAuth>
 
         <div>
-          <ul>
-            <li>
-              <Link to="/login">Public Page</Link>
-            </li>
-            <li>
-              <Link to="/home">Protected Page</Link>
-            </li>
-          </ul>
           <Switch>
             <Route exact path='/login'>
               <Login />

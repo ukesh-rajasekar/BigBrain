@@ -1,15 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Input from '../Components/Input'
 import Button from '../Components/button'
 import { doPost } from '../services/apiService'
 import { urls } from '../services/links'
 import { showToast } from '../services/toastService'
-
-// import { Redirect } from 'react-router-dom';
+import { AuthContext } from '../contexts/auth'
+import { RouteContext } from '../services/routingService'
+// import { Redirect, useLocation, withRouter } from 'react-router'
 
 const Login = () => {
   const [formValues, setForm] = useState({ email: '', password: '' })
-
+  // const loc = useLocation()
+  const auth = useContext(AuthContext)
+  const route = useContext(RouteContext)
+  // const history = useHistory()
   const setStateValue = (item, value) => {
     setForm({ ...formValues, [item]: value })
   }
@@ -19,6 +23,8 @@ const Login = () => {
       if (res.status === 200) {
         res.json().then((data) => {
           showToast('login Success', 'success')
+          auth.signin(data)
+          route.redirectTo('/home')
         })
       } else {
         showToast('Invalid input', 'error')
@@ -44,7 +50,8 @@ const Login = () => {
               type='password'
               handleChange={setStateValue}
             />
-            <Button buttonText='Login' buttonAction={onsubmit} />
+            <Button buttonText='Log In' buttonAction={onsubmit} />
+            <Button buttonText='sign Up' buttonAction={() => route.redirectTo('/register')} />
           </div>
         </div>
   )
