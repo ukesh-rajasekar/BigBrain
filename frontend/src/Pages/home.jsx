@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import Button from '../Components/button'
+import Game from '../Components/game'
 import Input from '../Components/Input'
 import Navbar from '../Components/navbar'
 import { doPost } from '../services/apiService'
 import { fetchAllGames, fetchAllGamesByIds } from '../services/gamesService'
 import { urls } from '../services/links'
 import { showToast } from '../services/toastService'
-
+// import EditQuestion from './editQuestion'
+const getCopy = (obj) => {
+  return JSON.parse(JSON.stringify(obj))
+}
 export default function home () {
   const [gameName, setgameName] = useState(false)
   const [formValues, setForm] = useState({ name: '' })
@@ -19,10 +23,11 @@ export default function home () {
       }
       fetchAllGamesByIds(ids).then((values) => {
         const games = []
-        for (const value of values) {
+        console.log(values);
+        Object.entries(values).map(([idx, value]) => {
           const gameDetails = value.value
-          games.push(gameDetails)
-        }
+          return games.push({ ...gameDetails, id: ids[idx] })
+        })
         setGames(games)
       })
     })
@@ -50,7 +55,13 @@ export default function home () {
       }
     })
   }
-
+  const gameDeleted = (id, idx) => {
+    if (games[idx].id === id) {
+      const temp = getCopy(games)
+      delete temp[idx]
+      setGames(temp)
+    }
+  }
   return (
     <div>
       <Navbar></Navbar>
@@ -67,9 +78,10 @@ export default function home () {
  <div>{(gameName && <Button buttonText="Create Game" buttonAction={oncreate} />)}</div>
         <div className="gamesWrapper">
           <div className="gamesContainer">
-            {Object.entries(games).map((value) => {
-              return <h3 key={value[0]}>{value[1].name}</h3>
-            }) }
+          {Object.entries(games).map(([idx, game]) => {
+            return <Game key={idx} index={idx} gameData={game} handleDelete={gameDeleted}/>
+            // return <EditQuestion key ={idx} />
+          }) }
           </div>
         </div>
     </div>

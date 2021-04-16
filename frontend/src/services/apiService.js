@@ -18,7 +18,6 @@ const getCopy = (obj) => {
 }
 export const doGet = (url, params = {}) => {
   const header = getCopy(HEADER)
-  console.log(url)
   header.method = 'GET'
   header.body = null
   const newUrl = new URL(url)
@@ -41,6 +40,28 @@ export const doPost = (url, params) => {
     header.headers.Authorization = `Bearer ${sessionStorage.getItem('Token')}`
   }
   console.log(sessionStorage)
+  const newUrl = new URL(url)
+  return fetch(newUrl, header)
+}
+
+export const doPut = (url, params) => {
+  const header = getCopy(HEADER)
+  header.method = 'PUT'
+  header.body = JSON.stringify(params)
+  if (sessionStorage.getItem('Token')) {
+    header.headers.Authorization = `Bearer ${sessionStorage.getItem('Token')}`
+  }
+  const newUrl = new URL(url)
+  return fetch(newUrl, header)
+}
+
+export const doDelete = (url, params) => {
+  const header = getCopy(HEADER)
+  header.method = 'DELETE'
+  // header.body = JSON.stringify(params)
+  if (sessionStorage.getItem('Token')) {
+    header.headers.Authorization = `Bearer ${sessionStorage.getItem('Token')}`
+  }
   const newUrl = new URL(url)
   return fetch(newUrl, header)
 }

@@ -9,6 +9,9 @@ import 'react-toastify/dist/ReactToastify.css'
 import { ProvideAuth, PrivateRoute } from './contexts/auth'
 import { RouterService } from './services/routingService'
 
+import Modal from 'react-modal';
+Modal.setAppElement('#root')
+
 function App () {
   return (
     <Router>
