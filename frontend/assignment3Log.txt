@@ -62,3 +62,27 @@ components:
 			each questions points
 			add url: string
 			answer: string of length 2 to 6
+			
+			
+2.3. Feature 3. Admin Start, Stop, Results of game 
+2.3.1 Starting a game 
+	on home page, start a game
+	action: start game
+	popup: session ID, copiable
+		action: copy session id link
+	when going to this link the user should be taken to 2.4
+	
+	stopping a game
+	on home page action: stop game
+	remove the first popup
+	show popup "Would you like to view the results?"
+		action: yes/no
+	if yes take to game results
+	
+	Game results:
+	Unique route
+	Once the screen loads, it should display the following:
+		Table of up to top 5 users and their score
+		Bar/Line chart showing a breakdown of what percentage of people (Y axis) got certain questions (X axis) correct
+		Some chart showing the average response/answer time for each question
+		Any other interesting information you see fit

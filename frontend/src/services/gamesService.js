@@ -19,6 +19,7 @@ export const fetchAllGamesByIds = (ids) => {
 }
 export const fetchQuizData = async (id) => {
 //   return Promise.resolve(12)
+  console.log('game service')
   return doGet(urls.gameByID + `/${id}`).then((res) => {
     if (res.status === 200) {
       return res.json()

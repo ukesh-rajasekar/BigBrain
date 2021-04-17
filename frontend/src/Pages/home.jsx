@@ -11,7 +11,9 @@ export default function home () {
   const [gameName, setgameName] = useState(false)
   const [formValues, setForm] = useState({ name: '' })
   const [games, setGames] = useState({ })
-  const fetchGames = () => {
+  // const [id, setId] = useState('')
+  const fetchGames = new Promise((resolve, reject) => {
+    console.log('fetch games')
     fetchAllGames().then((data) => {
       const ids = []
       for (const quiz of data.quizzes) {
@@ -19,16 +21,23 @@ export default function home () {
       }
       fetchAllGamesByIds(ids).then((values) => {
         const games = []
+        let count = 0
         for (const value of values) {
-          const gameDetails = value.value
+          let gameDetails = value.value
+          gameDetails = { ...gameDetails, id: ids[count] }
+          count = count + 1
           games.push(gameDetails)
         }
         setGames(games)
+        resolve()
       })
     })
   }
+  )
+
   useEffect(() => {
-    fetchGames()
+    console.log('use effect')
+    fetchGames.then(() => console.log(games))
     return () => {
 
     }
@@ -38,17 +47,50 @@ export default function home () {
   }
 
   const oncreate = () => {
+    console.log('on create');
     doPost(urls.create, formValues).then((res) => {
       console.log(formValues);
       if (res.status === 200) {
         res.json().then((data) => {
           showToast(`Game ${formValues.name} created`, 'success')
-          fetchGames()
+          fetchGames.then(() => console.log(games))
         })
       } else {
         showToast('Failed to create game, check input', 'error')
       }
     })
+  }
+
+  const onstart = (session) => {
+    console.log('on start');
+    console.log(session)
+    console.log(games)
+    doPost(urls.start + `/${session.id}` + '/start', formValues).then((res) => {
+      if (res.status === 200) {
+        res.json().then((data) => {
+          showToast(`Game ${formValues.name} started`, 'success')
+          fetchGames.then(() => console.log(games))
+        })
+      } else {
+        showToast('Failed to start game, check input', 'error')
+      }
+    })
+  }
+
+  const onend = (session) => {
+    console.log('onend');
+    doPost(urls.start + `/${session.id}` + '/end', formValues).then((res) => {
+      if (res.status === 200) {
+        res.json().then((data) => {
+          showToast(`Game ${formValues.name} ended`, 'success')
+          fetchGames.then(() => console.log(games))
+          console.log(games)
+        })
+      } else {
+        showToast('Game already ended, check input', 'error')
+      }
+    })
+    console.log(games)
   }
 
   return (
@@ -64,11 +106,18 @@ export default function home () {
               handleChange={setStateValue}
             />
             )}</div>
- <div>{(gameName && <Button buttonText="Create Game" buttonAction={oncreate} />)}</div>
+ <div>{(gameName && <Button buttonText="Create Game" buttonAction={() => oncreate()} />)}</div>
         <div className="gamesWrapper">
           <div className="gamesContainer">
             {Object.entries(games).map((value) => {
-              return <h3 key={value[0]}>{value[1].name}</h3>
+              return (
+              <>
+              <h3 key={value[0]}>{value[1].name}</h3>
+              <Button buttonText="Start Game" buttonAction ={ () => onstart(value[1]) } />
+              {/* <div>{alert(value[0])}</div> */}
+              <Button buttonText="End Game" buttonAction={ () => onend(value[1]) } />
+              </>
+              )
             }) }
           </div>
         </div>
