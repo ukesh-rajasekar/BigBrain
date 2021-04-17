@@ -1,4 +1,4 @@
-
+import {getCopy} from './helpers'
 const HEADER = {
   method: 'GET', // *GET, POST, PUT, DELETE, etc.
   mode: 'cors', // no-cors, *cors, same-origin
@@ -13,9 +13,7 @@ const HEADER = {
   referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
   // body: null // body data type must match "Content-Type" header
 } // referenced from https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-const getCopy = (obj) => {
-  return JSON.parse(JSON.stringify(obj))
-}
+
 export const doGet = (url, params = {}) => {
   const header = getCopy(HEADER)
   header.method = 'GET'
@@ -39,7 +37,6 @@ export const doPost = (url, params) => {
   if (sessionStorage.getItem('Token')) {
     header.headers.Authorization = `Bearer ${sessionStorage.getItem('Token')}`
   }
-  console.log(sessionStorage)
   const newUrl = new URL(url)
   return fetch(newUrl, header)
 }
