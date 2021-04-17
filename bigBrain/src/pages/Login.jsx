@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react'
-import Input from '../components/UI/Input';
-import Button from '../components/UI/Button';
+
 import { useHistory } from 'react-router';
+import Input from '../components/Input'
+import Button from '../components/button'
 import { Authenticator } from '../contexts/Auth';
 import { loginAdmin } from "../services/Auth/authServices";
 
