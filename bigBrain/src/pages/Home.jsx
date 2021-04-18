@@ -25,6 +25,7 @@ export const Home = () => {
     const fetchGames = () => {
         fetchAllGames().then((data) => {
           const ids = []
+          console.log(data)
           for (const quiz of data.quizzes) {
             ids.push(quiz.id)
           }
@@ -140,8 +141,8 @@ export const Home = () => {
           <div className="gamesContainer">
             {Object.entries(games).map((value) => {
               return <React.Fragment key={value[1].id}><h3 key={value[0]}>{value[1].name}</h3>
-              <div>{(!sessionStatus && <Button buttonText = 'Start game' buttonAction = {()=> onstart (value[1].id)} />)}</div>
-        <div>{(sessionStatus && <Button buttonText = 'End game' buttonAction = {()=> onend (value[1].id)} />)}</div>
+              <div>{(<Button buttonText = 'Start game' buttonAction = {()=> onstart (value[1].id)} />)}</div>
+        <div>{(<Button buttonText = 'End game' buttonAction = {()=> onend (value[1].id)} />)}</div>
               </React.Fragment>
             }) }
           </div>

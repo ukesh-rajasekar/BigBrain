@@ -37,6 +37,7 @@ export const doPost = (url, params) => {
   if (sessionStorage.getItem('Token')) {
     header.headers.Authorization = `Bearer ${sessionStorage.getItem('Token')}`
   }
+  console.log(sessionStorage.getItem('Token'))
   const newUrl = new URL(url)
   return fetch(newUrl, header)
 }
