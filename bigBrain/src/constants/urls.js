@@ -8,6 +8,7 @@ export const urls = {
   gameByID: `${SERVER}/admin/quiz`,
   updateGame: `${SERVER}/admin/quiz`,
   gameSession: `${SERVER}/admin/quiz`,
-  gameResults: `${SERVER}/admin/session`
+  gameResults: `${SERVER}/admin/session`,
+  // gameResults: `${SERVER}/admin/session`,
 
 }

@@ -18,7 +18,7 @@ const Login = () => {
   loginAdmin(formValues).then((data) => {
       if (data?.token) {
         auth.signIn(data);
-        history.push('/dashboard')
+        history.push('/admin')
       } else {
         alert(data.error)
       }

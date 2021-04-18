@@ -18,7 +18,7 @@ const Register = () => {
     registerAdmin(formValues).then((data) => {
       if (data?.token) {
         auth.signUp(data);
-        history.push('/dashboard')
+        history.push('/admin')
       } else {
         alert(data.error)
       }

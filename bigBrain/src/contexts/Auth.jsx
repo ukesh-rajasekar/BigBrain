@@ -11,7 +11,7 @@ export function AuthContext({ children }) {
 }
 
 function SetAuthValues() {
-  const [authToken, setAuthtoken] = useState(false);
+  const [authToken, setAuthtoken] = useState(false || sessionStorage.getItem('Token'));
   const signIn = (data) => {
     const { token } = data;
     setAuthtoken(token);
