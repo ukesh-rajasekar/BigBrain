@@ -12,5 +12,4 @@ export const loginAdmin = (params) => {
     return doPost(urls.login, params).then((res) => {
             return res.json()
     })
-   
 }

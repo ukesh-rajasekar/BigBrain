@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+
+.popup-wrapper{
+  background-color: #345aa5;
+    width: 200px;
+    height: 90px;
+    padding: 5px;
+}
+.popup-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+span{
+  margin-left: 185px;
+  font-size: larger;
+  color: red;
+}
+span:hover{
+  opacity: 0.5;
+}
