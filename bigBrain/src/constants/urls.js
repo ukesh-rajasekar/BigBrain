@@ -7,5 +7,7 @@ export const urls = {
   allGames: `${SERVER}/admin/quiz`,
   gameByID: `${SERVER}/admin/quiz`,
   updateGame: `${SERVER}/admin/quiz`,
+  gameSession: `${SERVER}/admin/quiz`,
+  gameResults: `${SERVER}/admin/session`
 
 }

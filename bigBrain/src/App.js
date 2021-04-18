@@ -10,6 +10,9 @@ import React, { useContext } from "react";
 import { AuthContext, Authenticator } from "./contexts/Auth";
 import Register from "./pages/registration";
 import Login from "./pages/Login";
+import {Home} from "./pages/Home";
+import Results from "./pages/Results";
+import Playjoin from "./pages/Playjoin";
 
 function App() {
   return (
@@ -26,26 +29,32 @@ function App() {
             <Register />
           </Route>
           <PrivateRoute exact path="/dashboard">
-            <Dashboard />
+            <Home />
           </PrivateRoute>
           <PrivateRoute exact path="/dashboard/:gameId">
             <GameDetails />
           </PrivateRoute>
-          <PrivateRoute path="/dashboard/:gameId/:quesId">
+          <PrivateRoute exact path="/dashboard/:gameId/:quesId">
             <QuestionDetails />
+          </PrivateRoute>
+          <PrivateRoute path="/dashboard/session/:sessionId/results">
+            <Results />
+          </PrivateRoute>
+          <PrivateRoute path="/play/join/:sessionid">
+            <Playjoin />
           </PrivateRoute>
         </Switch>
       </Router>
     </AuthContext>
   );
 }
-const Home = () => {
-  return (
-    <React.Fragment>
-      <h1>Home</h1>
-    </React.Fragment>
-  );
-};
+// const Home = () => {
+//   return (
+//     <React.Fragment>
+//       <h1>Home</h1>
+//     </React.Fragment>
+//   );
+// };
 
 
 const Dashboard = () => {

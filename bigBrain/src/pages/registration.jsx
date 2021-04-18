@@ -1,11 +1,9 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router";
-
 import { Authenticator } from "../contexts/Auth";
 import { registerAdmin } from "../services/Auth/authServices";
-import Button from "../components/UI/Button";
-import Input from "../components/UI/Input";
-
+import Input from '../components/Input'
+import Button from '../components/button'
 const Register = () => {
   const history = useHistory(); // let auth = useAuth();
   const [formValues, setForm] = useState({ email: "", password: "", name: "" });

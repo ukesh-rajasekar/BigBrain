@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.css'
-import Home from './Pages/home'
+// import Home from './Pages/home'
 import { Login } from './Pages/login'
 import Registration from './Pages/registration'
 import { ToastContainer } from 'react-toastify'
@@ -9,8 +9,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { ProvideAuth, PrivateRoute } from './contexts/auth'
 import { RouterService } from './services/routingService'
 
-import Modal from 'react-modal';
-Modal.setAppElement('#root')
+const Home = lazy(() => import('./Pages/home'));
 
 function App () {
   return (
@@ -20,6 +19,7 @@ function App () {
             <ProvideAuth>
 
         <div>
+          <Suspense fallback={<div>Loading....</div>}>
           <Switch>
             <Route exact path='/login'>
               <Login />
@@ -31,6 +31,7 @@ function App () {
               <Home />
             </PrivateRoute>
           </Switch>
+          </Suspense>
           <ToastContainer
             position='bottom-right'
             autoClose={2000}

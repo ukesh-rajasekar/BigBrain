@@ -15,15 +15,21 @@ function SetAuthValues() {
   const signIn = (data) => {
     const { token } = data;
     setAuthtoken(token);
+    sessionStorage.setItem('Token', token )
+    console.log(sessionStorage);
   };
 
   const signUp = (data) => {
     const { token } = data;
     setAuthtoken(token);
+    sessionStorage.setItem('Token', token )
+    console.log(sessionStorage);
   };
 
   const logOut = () => {
     setAuthtoken(false);
+    sessionStorage.removeItem('Token')
+    console.log(sessionStorage);
   };
   return {
     authToken,

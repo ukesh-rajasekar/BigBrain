@@ -6,6 +6,6 @@ export const urls = {
   create: `${SERVER}/admin/quiz/new`,
   allGames: `${SERVER}/admin/quiz`,
   gameByID: `${SERVER}/admin/quiz`,
-  updateGame: `${SERVER}/admin/quiz`,
+  start: `${SERVER}/admin/quiz`
 
 }
