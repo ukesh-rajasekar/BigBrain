@@ -21,6 +21,9 @@ import GameDetails from "./pages/GameDetails";
 import { getQuestionFromIds } from "./services/Admin/gamehelper";
 import EditQuestion from "./components/game/editQuestion";
 import { Home } from "./pages/Home";
+import Play from "./pages/Play";
+import PageNotFound from "./components/PageNotFound";
+import Game from "./pages/Game";
 
 function App() {
   console.log(sessionStorage);
@@ -28,7 +31,7 @@ function App() {
     <AuthContext>
       <Router>
         <Switch>
-          <Route exact path="/">
+        <Route exact path="/">
             <Login />
           </Route>
           <Route path="/login">
@@ -52,9 +55,18 @@ function App() {
           <PrivateRoute path="/admin/session/:sessionId/results">
             <Results />
           </PrivateRoute>
-          <PrivateRoute path="/play/join/:sessionid">
-            <Playjoin />
-          </PrivateRoute>
+          <Route exact path="/play">
+            <Play />
+          </Route>
+          <Route exact path="/play/:playerName/:sessionId">
+            <Game />
+          </Route>
+          <Route path="/play/:playerName/:sessionId/result">
+            <PlayerResult />
+          </Route>
+          <Route path="/*">
+            <PageNotFound />
+          </Route>
         </Switch>
          <ToastContainer
             position='bottom-right'
@@ -71,13 +83,13 @@ function App() {
     </AuthContext>
   );
 }
-// const Home = () => {
-//   return (
-//     <React.Fragment>
-//       <h1>Home</h1>
-//     </React.Fragment>
-//   );
-// };
+const PlayerResult = () => {
+  return (
+    <React.Fragment>
+      <h1>PlayerResult </h1>
+    </React.Fragment>
+  );
+};
 
 
 

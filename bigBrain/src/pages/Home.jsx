@@ -73,7 +73,14 @@ const fetchGames = () => {
       }
     });
   };
-
+  const onadvance = (gameId) => {
+    doPost(`${urls.gameSession}/${gameId}/advance`).then((res)=> {
+      if (res.status === 200) {
+        console.log("Advancing");
+        showToast(`Game Advanced`, "info");
+      }
+    })
+  }
   const onend = (gameId) => {
     doPost(urls.gameSession + `/${gameId}/end`).then((res) => {
       if (res.status === 200) {
@@ -120,7 +127,8 @@ const fetchGames = () => {
           <div className="gamesContainer">
             {Object.entries(games).map((value) => {
               return <React.Fragment key={value[1].id}><h3 key={value[0]}>{value[1].name}</h3>
-              <div>{(<Button buttonText = 'Start game' buttonAction = {()=> onstart (value[1].id)} />)}</div>
+              <div>{(<Button buttonText = 'Start game' buttonAction = {()=> onstart(value[1].id)} />)}</div>
+              <div>{(!sessionStatus && <Button buttonText = 'Advance game' buttonAction = {()=> onadvance(value[1].id)} />)}</div>
         <div>{(<Button buttonText = 'End game' buttonAction = {()=> onend (value[1].id)} />)}</div>
               </React.Fragment>
             }) }

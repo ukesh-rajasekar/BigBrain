@@ -9,6 +9,9 @@ export const urls = {
   updateGame: `${SERVER}/admin/quiz`,
   gameSession: `${SERVER}/admin/quiz`,
   gameResults: `${SERVER}/admin/session`,
+  playerId: `${SERVER}/play/join`,
+  pollGameStart: `${SERVER}/play`
+
   // gameResults: `${SERVER}/admin/session`,
 
 }
