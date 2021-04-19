@@ -45,9 +45,10 @@ const defaultDetails = {
   },
   answer: {
     name: 'answer',
-    type: 'text',
+    type: 'options',
     title: '',
-    questionLabel: 'Enter the answer',
+      questionLabel: 'Enter the answer',
+    options: ['single-choice', 'multiple-choice'],
     value: '',
     constrains: {
       length: {
@@ -84,8 +85,9 @@ const EditQuestion = (props) => {
   }, [gameId,quesId])
 
   // Update the details when user chages the values
-  const handleChange = (item, value) => {
-    const tempDetails = { ...newDetails }
+    const handleChange = (item, value) => {
+      console.log(item,value);
+    const tempDetails = getCopy(newDetails)
     if (tempDetails[item]?.constrains?.length) {
       const { max } = tempDetails[item]?.constrains?.length
       if (value.length > max) return

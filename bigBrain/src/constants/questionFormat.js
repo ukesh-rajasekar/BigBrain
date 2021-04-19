@@ -12,7 +12,7 @@ export const questionFormat = {
     name: 'type',
     type: 'options',
     placeholder: '',
-    questionLabel: 'Choode the type of question',
+    questionLabel: 'Choose the type of question',
     value: '',
     options: ['single-choice', 'multiple-choice'],
   },
@@ -39,10 +39,11 @@ export const questionFormat = {
   },
   answer: {
     name: 'answer',
-    type: 'text',
+    type: 'answer',
     placeholder: 'Enter the answer for the question',
+    options: ['single-choice', 'multiple-choice'],
     questionLabel: 'Enter the answer',
-    value: '',
+    value: [],
     constrains: {
       length: {
         min: 2,
