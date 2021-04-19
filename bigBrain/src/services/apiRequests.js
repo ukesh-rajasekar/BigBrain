@@ -31,6 +31,8 @@ export const doGet = (url, params = {}) => {
 }
 
 export const doPost = (url, params) => {
+  console.log(url)
+
   const header = getCopy(HEADER)
   header.method = 'POST'
   header.body = JSON.stringify(params)
