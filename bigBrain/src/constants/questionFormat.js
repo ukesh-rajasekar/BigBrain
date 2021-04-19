@@ -13,7 +13,7 @@ export const questionFormat = {
     type: 'options',
     placeholder: '',
     questionLabel: 'Choose the type of question',
-    value: '',
+    value: 'single-choice',
     options: ['single-choice', 'multiple-choice'],
   },
   timeLimit: {

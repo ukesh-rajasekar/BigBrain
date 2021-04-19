@@ -1,10 +1,11 @@
 import React,{useState, useEffect} from 'react'
 import { useHistory, useParams, useRouteMatch } from 'react-router-dom'
+import CurrentQuestion from '../components/player/CurrentQuestion'
 import { getPlayerId, pollGameStart, pollGameEnd } from '../services/Player/playerServices'
 import {showToast} from '../services/toastServices'
 export default function Game() {
-    const {playerName,sessionId} = useParams()
-    const [playerId, setPlayerId] = useState()
+    const {playerName,sessionId} = useParams('Guest')
+    const [playerId, setPlayerId] = useState(null)
     const [gameStarted, setGameStarted] = useState(false)
     const [gameEnded, setGameEnded] = useState(false)
     const history = useHistory()
@@ -43,7 +44,7 @@ export default function Game() {
         <div>
             <h3>Welcome {playerName},{sessionId}</h3>
             <h3>Active session: {sessionId}</h3>
-
+            <CurrentQuestion playerId={playerId} />
         </div>
     )
 }

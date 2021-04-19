@@ -128,7 +128,7 @@ const fetchGames = () => {
             {Object.entries(games).map((value) => {
               return <React.Fragment key={value[1].id}><h3 key={value[0]}>{value[1].name}</h3>
               <div>{(<Button buttonText = 'Start game' buttonAction = {()=> onstart(value[1].id)} />)}</div>
-              <div>{(!sessionStatus && <Button buttonText = 'Advance game' buttonAction = {()=> onadvance(value[1].id)} />)}</div>
+              <div>{(<Button buttonText = 'Advance game' buttonAction = {()=> onadvance(value[1].id)} />)}</div>
         <div>{(<Button buttonText = 'End game' buttonAction = {()=> onend (value[1].id)} />)}</div>
               </React.Fragment>
             }) }
