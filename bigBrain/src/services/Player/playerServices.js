@@ -12,12 +12,17 @@ export const getPlayerId = (sessionId, playerName) => {
 export const pollGameStart =(playerId) => {
     return new Promise((resolve,reject)=>{
         let gameStartPoller = setInterval(() => {
-            doGet(`${urls.pollGameStart}/${playerId}/status`).then((res) =>   res.json().then((data)=>{
+            doGet(`${urls.pollGameStart}/${playerId}/status`).then((res) =>   {
+                if (res.status !== 200){
+                    clearInterval(gameStartPoller)
+                    return reject()
+                }
+                res.json().then((data)=>{
                 if(data.started){
                     resolve(data)
                     clearInterval(gameStartPoller);
                 }
-            }))
+            })})
         }, 1000);
     })
 }
@@ -50,6 +55,10 @@ export const PollGetTimeSinceStarted = (playerId,questionId) => {
                 }))
         }, 1000); 
     })
+}
+
+export const getPlayerResults = (playerId) => {
+    return doGet(`${urls.playerResults}/${playerId}/results`).then((res) =>  {return res.json()})
 }
 
 

@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 export const Home = () => {
   const history = useHistory();
   const [games, setGames] = useState({});
+  const [quizId, setQuizId] = useState(null);
   const [sessionStatus, setSessionStatus] = useState(false);
   const [sessionId, setSessionId] = useState("");
   const [sessionOpen, setSessionOpen] = useState(false);
@@ -54,6 +55,7 @@ const fetchGames = () => {
 
 
   const onstart = (gameId) => {
+    setQuizId(gameId)
     doPost(urls.gameSession + `/${gameId}/start`).then((res) => {
       if (res.status === 200) {
         console.log("created");
@@ -78,6 +80,11 @@ const fetchGames = () => {
       if (res.status === 200) {
         console.log("Advancing");
         showToast(`Game Advanced`, "info");
+      } else {
+        showToast('Game Ended', 'info')
+        setSessionStatus(!sessionStatus);
+        setSessionOpen(false);
+        setSessionClose(true);
       }
     })
   }
@@ -98,15 +105,15 @@ const fetchGames = () => {
         setSessionClose(true);
       } else {
         //console.log('Invalid request')
-        showToast("Game could not be ended", "error");
+        showToast("You have already ended the game", "error");
       }
     });
   };
 
-  const gotoresults = (sessionId) => {
+  const gotoresults = (sessionId, quizId) => {
     setSessionClose(false);
     console.log(sessionId);
-    history.push(`/admin/session/${sessionId}/results`);
+    history.push(`/admin/session/${quizId}/${sessionId}/results`);
   };
 
   return (
@@ -128,7 +135,7 @@ const fetchGames = () => {
             {Object.entries(games).map((value) => {
               return <React.Fragment key={value[1].id}><h3 key={value[0]}>{value[1].name}</h3>
               <div>{(<Button buttonText = 'Start game' buttonAction = {()=> onstart(value[1].id)} />)}</div>
-              <div>{(<Button buttonText = 'Advance game' buttonAction = {()=> onadvance(value[1].id)} />)}</div>
+              
         <div>{(<Button buttonText = 'End game' buttonAction = {()=> onend (value[1].id)} />)}</div>
               </React.Fragment>
             }) }
@@ -147,6 +154,7 @@ const fetchGames = () => {
                       navigator.clipboard.writeText(sessionId)
                     }
                   />
+                  <div>{(<Button buttonText = 'Advance game' buttonAction = {()=> onadvance(quizId)} />)}</div>
                 </>
               }
               handleClose={() => setSessionOpen(false)}
@@ -163,7 +171,7 @@ const fetchGames = () => {
                   <Button
                     buttonText="Yes"
                     buttonAction={() => {
-                      gotoresults(sessionId);
+                      gotoresults(sessionId, quizId);
                     }}
                   />
                   <Button

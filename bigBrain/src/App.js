@@ -13,7 +13,7 @@ import Register from "./pages/registration";
 import Login from "./pages/Login";
 // import {Home} from "./pages/Home";
 import Results from "./pages/Results";
-import Playjoin from "./pages/Playjoin";
+// import Playjoin from "./pages/Playjoin";
 import AdminDashboard from "./pages/AdminDashboard";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
@@ -52,7 +52,7 @@ function App() {
           <PrivateRoute exact path="/admin/:gameId/:quesId">
             <EditQuestion />
           </PrivateRoute>
-          <PrivateRoute path="/admin/session/:sessionId/results">
+          <PrivateRoute path="/admin/session/:quizId/:sessionId/results">
             <Results />
           </PrivateRoute>
           <Route exact path="/play">
@@ -60,9 +60,6 @@ function App() {
           </Route>
           <Route exact path="/play/:playerName/:sessionId">
             <Game />
-          </Route>
-          <Route path="/play/:playerName/:sessionId/result">
-            <PlayerResult />
           </Route>
           <Route path="/*">
             <PageNotFound />

@@ -13,6 +13,7 @@ export const urls = {
   pollGameStart: `${SERVER}/play`,
   pollGameTimeSinceStart: `${SERVER}/play`,
   sendAnswers: `${SERVER}/play`,
+  playerResults: `${SERVER}/play`
 
   // gameResults: `${SERVER}/admin/session`,
 
