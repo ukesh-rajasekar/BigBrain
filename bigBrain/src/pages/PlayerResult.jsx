@@ -4,11 +4,7 @@ import { getPlayerResults } from '../services/Player/playerServices';
 
 export default function PlayerResult({playerId, playerName, points}) {
     const QuestionPoints = getCopy(points)
-    console.log(points);
-
     QuestionPoints.shift() 
-    console.log(QuestionPoints);
-
     const [results, setResults] = useState([])
     const [playerPoints, setPlayerPoints] = useState(0)
 
@@ -31,7 +27,6 @@ export default function PlayerResult({playerId, playerName, points}) {
     const caluculatePoints =() => {
         let playerPoints = 0
         results.map((result, idx) => {
-            console.log(result);
             if (result.correct){
                 playerPoints = playerPoints + QuestionPoints[idx]
             }
@@ -41,7 +36,7 @@ export default function PlayerResult({playerId, playerName, points}) {
     }
     return (
         <div>
-            <h3>Your Score</h3>
+            <h3>{playerName} Score</h3>
            {playerPoints} Points
            {results.map((result,idx)=> {
                return <div> 
