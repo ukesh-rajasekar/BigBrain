@@ -27,3 +27,13 @@ export const fetchQuizData =  (id) => {
     }
   })
 }
+
+export const fetchGameResult = (sessionId) => {
+  return doGet(`${urls.gameResults}/${sessionId}/results`).then((res) => {
+    if (res.status === 200) {
+      return res.json()
+    } else {
+      console.error('failed to get games results')
+    }
+  })
+}

@@ -113,7 +113,7 @@ const fetchGames = () => {
   const gotoresults = (sessionId, quizId) => {
     setSessionClose(false);
     console.log(sessionId);
-    history.push(`/admin/session/${quizId}/${sessionId}/results`);
+    history.push(`/admin/${quizId}/${sessionId}/results`);
   };
 
   return (

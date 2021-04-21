@@ -52,7 +52,7 @@ function App() {
           <PrivateRoute exact path="/admin/:gameId/:quesId">
             <EditQuestion />
           </PrivateRoute>
-          <PrivateRoute path="/admin/session/:quizId/:sessionId/results">
+          <PrivateRoute path="/admin/:gameId/:sessionId/results">
             <Results />
           </PrivateRoute>
           <Route exact path="/play">

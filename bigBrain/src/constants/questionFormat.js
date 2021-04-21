@@ -21,14 +21,14 @@ export const questionFormat = {
     type: 'text',
     placeholder: 'Enter the time in seconds',
     questionLabel: 'Enter the time limit',
-    value: '',
+    value: 60,
   },
   points: {
     name: 'points',
     type: 'text',
     placeholder: 'Enter the points to be awarded',
     questionLabel: 'Enter the point',
-    value: '',
+    value: 20,
   },
   url: {
     name: 'url',
