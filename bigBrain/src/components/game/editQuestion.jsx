@@ -122,9 +122,7 @@ const EditQuestion = (props) => {
   return (
     <div className='wrapper'>
       <div className='container'>
-        <h3>Edit Question</h3>
-        <h4>GameId: {gameId}</h4>
-        <h4>questionId: {quesId}</h4>
+       
         <h3>Question Details</h3>
         <div className='questionDetails'>
           {/* Generate question inputs as needed */}

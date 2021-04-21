@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { oncreate } from "../services/Admin/games";
 import {addQuestions} from '../services/Admin/gamehelper'
+import Navbar from "../components/navBar";
 export default function UploadGame() {
   const [gameData, setGameData] = useState({});
   const [quizID, setQuizId] = useState(null);
@@ -41,6 +42,7 @@ export default function UploadGame() {
 
   return (
     <div>
+      <Navbar></Navbar>
       <h3>upload game</h3>
       <input
         name="GameFile"

@@ -5,7 +5,8 @@ import Input from '../components/Input'
 import Button from '../components/button'
 import { Authenticator } from '../contexts/Auth';
 import { loginAdmin } from "../services/Auth/authServices";
-import showtoast from "../services/toastServices"
+import './styles/login.css';
+import {Card,Row, Container, Col} from "react-bootstrap"
 
 export const validateInput = (str = "") => {
   return str.includes('@');
@@ -32,10 +33,13 @@ export const Login = () => {
 
   
   return (
-    <React.Fragment>
-      <div className='wrapper'>
-          <div className='container'>
-            <p className='header'>Welcome</p>
+    <Container fluid="md">
+      <Row className="justify-content-md-center">
+        <Col>
+      <Card className=' text-center'
+        bg={"light"}>
+        <Card.Body className='container'>
+          <Card.Header>Hello BigBrains, please log in</Card.Header>
             <Input
               name='email'
               placeholder='Email'
@@ -53,10 +57,13 @@ export const Login = () => {
             />
             <Button buttonText='Log In' buttonAction={onsubmit} />
             <Button buttonText='Sign Up' buttonAction={() => history.push('/register')} />
-          </div>
-        </div>
-    </React.Fragment>
+          </Card.Body>
+          </Card >
+          </Col>
+     </Row>
+</Container>
   );
 };
+
 
 

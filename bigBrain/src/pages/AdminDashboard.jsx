@@ -47,7 +47,7 @@ function AdminDashboard(props) {
   return (
     <React.Fragment>
       <Navbar></Navbar>
-          <h1 className = 'dashboard-title'>Dashboard</h1>
+          <h1 className = 'dashboard-title' hidden>Dashboard</h1>
           <div>
               <div>
                 <Button

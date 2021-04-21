@@ -13,26 +13,32 @@ exports[`Render Login render with no props 1`] = `
       Welcome
     </p>
     <input
-      className="email"
+      className="email form-control"
       name="email"
       onChange={[Function]}
       placeholder="Email"
       type="text"
     />
     <input
-      className="password"
+      className="password form-control"
       name="password"
       onChange={[Function]}
       placeholder="Password"
       type="password"
     />
     <button
+      className="btn btn-primary"
+      disabled={false}
       onClick={[Function]}
+      type="button"
     >
       Log In
     </button>
     <button
+      className="btn btn-primary"
+      disabled={false}
       onClick={[Function]}
+      type="button"
     >
       Sign Up
     </button>

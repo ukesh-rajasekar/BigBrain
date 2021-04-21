@@ -4,6 +4,8 @@ import { Authenticator } from "../contexts/Auth";
 import { registerAdmin } from "../services/Auth/authServices";
 import Input from '../components/Input'
 import Button from '../components/button'
+import {Card,Row, Container, Col} from "react-bootstrap"
+
 const Register = () => {
   const history = useHistory(); // let auth = useAuth();
   const [formValues, setForm] = useState({ email: "", password: "", name: "" });
@@ -25,10 +27,13 @@ const Register = () => {
     });
   };
   return (
-    <React.Fragment>
-      <div className="wrapper">
-        <div className="container">
-          <p className="header">Welcome</p>
+     <Container fluid="md">
+      <Row className="justify-content-md-center">
+        <Col>
+      <Card className=' text-center'
+        bg={"light"}>
+        <Card.Body className='container'>
+          <Card.Header>Welcome to the Club, Please Register</Card.Header>
           <Input
             name="name"
             placeholder="name"
@@ -58,9 +63,11 @@ const Register = () => {
             buttonText="Log In"
             buttonAction={() => history.push("/login")}
           />
-        </div>
-      </div>
-    </React.Fragment>
+         </Card.Body>
+          </Card >
+          </Col>
+     </Row>
+</Container>
   );
 };
 

@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import {Button as Btn} from 'react-bootstrap';
 
-function Button ({ name, buttonText, buttonAction }) {
+function Button ({ name, buttonText, buttonAction, ...rest }) {
   return (
-        <button name = {name} onClick = {buttonAction}>{buttonText}</button>
+        <Btn name = {name} onClick = {buttonAction} {...rest}>{buttonText}  </Btn>
   )
 }
 

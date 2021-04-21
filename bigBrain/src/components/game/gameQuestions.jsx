@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Button from "../button";
 import { useHistory, useRouteMatch } from "react-router";
-
+import Card from 'react-bootstrap/Card'
 function GameQuestion(props) {
     const { question } = props.question;
     const {url} = useRouteMatch()
@@ -12,21 +12,31 @@ function GameQuestion(props) {
   };
   return (
     <div>
-      <h3>
-        Question {props.index + 1}: {question.value}
-      </h3>
-     
-      <Button
+        <Card style={{ width: '18rem' }}>
+      <Card.Body>
+        <Card.Title>Question {props.index + 1}: {question.value}</Card.Title>
+
+               <Button
+            variant="primary"
         buttonText="Edit question"
         buttonAction={() => editQuestion()}
-      ></Button>
+          ></Button>
+          <Button
+        buttonText="Delete question"
+                buttonAction={() => props.handleDelete(props.index)}
+                 variant="danger"
+                  ></Button>
+      </Card.Body>
+    </Card>
+     
     </div>
   );
 }
 
 GameQuestion.propTypes = {
     question: PropTypes.object,
-    quesId: PropTypes.string,
+  quesId: PropTypes.string,
+    handleDelete: PropTypes.func
 };
 
 export default GameQuestion;
