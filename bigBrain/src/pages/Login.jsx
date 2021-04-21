@@ -5,7 +5,7 @@ import Input from '../components/Input'
 import Button from '../components/button'
 import { Authenticator } from '../contexts/Auth';
 import { loginAdmin } from "../services/Auth/authServices";
-
+import showtoast from "../services/toastServices"
 const Login = () => {
   const history = useHistory();
     const auth = useContext(Authenticator);
@@ -25,6 +25,9 @@ const Login = () => {
     });
   }
 
+  const validateInput = (str = "") => {
+    str.includes('@');
+  }
   return (
     <React.Fragment>
       <div className='wrapper'>
@@ -37,6 +40,7 @@ const Login = () => {
               type='text'
               handleChange={setStateValue}
             />
+            {formValues.email && !validateInput(formValues.email) ? <p>Invalid email !</p> : null}
             <Input
               name='password'
               placeholder='Password'

@@ -15,5 +15,8 @@ Input.propTypes = {
   handleChange: PropTypes.func
 
 }
+Input.defaultProps = {
+  type: 'text',
+};
 
 export default Input
