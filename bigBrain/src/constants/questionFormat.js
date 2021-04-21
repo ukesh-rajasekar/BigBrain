@@ -1,7 +1,7 @@
 
 export const questionFormat = {
     id:0,
-     question: {
+    question: {
     name: 'question',
     type: 'text',
     placeholder: 'Enter a Question',
@@ -35,7 +35,7 @@ export const questionFormat = {
     type: 'text',
     placeholder: 'Enter a video URL',
     questionLabel: 'Enter the youtube UR',
-    value: '',
+    value: 'URL',
   },
   answer: {
     name: 'answer',

@@ -24,6 +24,7 @@ import { Home } from "./pages/Home";
 import Play from "./pages/Play";
 import PageNotFound from "./components/PageNotFound";
 import Game from "./pages/Game";
+import UploadGame from "./pages/UploadGame";
 
 function App() {
   console.log(sessionStorage);
@@ -45,6 +46,9 @@ function App() {
           </Route>
           <PrivateRoute exact path="/admin">
             <AdminDashboard />
+          </PrivateRoute>
+          <PrivateRoute exact path="/admin/uploadGame">
+            <UploadGame />
           </PrivateRoute>
           <PrivateRoute exact path="/admin/:gameId">
             <GameDetails />

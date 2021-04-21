@@ -1,7 +1,8 @@
 import { urls } from "../../constants/urls"
 import { doDelete, doPut } from "../apiRequests"
 import { fetchQuizData } from "../games/gameService"
-
+import { getCopy } from '../helpers';
+import { v4 as uuidv4 } from "uuid";
 export const updateGameQuestions = (id, newGamedata) => {
   return doPut(urls.updateGame + `/${id}`, newGamedata).then((res) => {
     if (res.status === 200) {
@@ -66,3 +67,29 @@ export const updateGameQuestionOfId = (gameId, quesId, newGamedata) => {
     })
   })) 
 }
+
+export const addQuestions = (gameId,questions) => {
+   
+  let newQues = getCopy(questions);
+    const newQuestions = newQues.map((question, idx) => {
+      question.id = uuidv4();
+      const answers = question?.answer?.value.map((answer, idx) => {
+        answer.id = uuidv4()
+        return answer
+      })
+      question.answer.value = answers
+    return question
+      })
+      
+ 
+
+      updateGameQuestions(gameId, {
+      questions: [...newQuestions],
+      thumbnail: "",
+      }).then((data) => {
+      if (JSON.stringify(data) === "{}") {
+         console.log('Questions Added');
+      }
+      });
+  }
+            

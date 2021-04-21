@@ -17,6 +17,7 @@ function QuestionInput (props) {
     questionLabel,
     options,
   } = props
+  console.log((name,value));
   switch (type) {
     // Case for normal string inputs
     case 'text': {
@@ -95,7 +96,7 @@ QuestionInput.propTypes = {
   type: PropTypes.string,
   title: PropTypes.string,
   questionLabel: PropTypes.string,
-  value: PropTypes.oneOfType['string', 'array'],
+  value: PropTypes.oneOfType([PropTypes.string , PropTypes.array]),
   options: PropTypes.array,
 }
 
@@ -156,10 +157,10 @@ const Answer = ({ answers, handleChange }) => {
   }
   return <div>
     {newAnswers.map((value, idx) => {
-      return <div><h3>{value.answer}</h3>
+      return <div key={ idx}><h3>{value.answer}</h3>
     <Button buttonText="remove answer" buttonAction={() => handleRemove(idx)} />
         <input type="checkbox" name="isCorrectAnswer" checked={value.isCorrectAnswer} onChange={(e)=> handleValueChange("checkbox", [idx, e.target.checked])}/>
-      <label for="isCorrectAnswer"> Is it a right answer?</label><br></br>
+      <label htmlFor="isCorrectAnswer"> Is it a right answer?</label><br></br>
       </div>
     })}
     <input
