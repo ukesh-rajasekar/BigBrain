@@ -26,8 +26,10 @@ export default function GameResultStats({ questions, sessionId, gameId }) {
                  const temp = playersGameStats
                  temp.push(result)
                  setQuestionTimeStats({})
-                 setQuestionTimeStats({})
-                 setPlayerGameStat(getCopy([...temp]).sort((a, b) => (a.totalPoints < b.totalPoints) ? 1 : -1))
+                 setQuestionCurrectStats({})
+                 const newPlayerStats = getCopy([...temp]).sort((a, b) => (a.totalPoints < b.totalPoints) ? 1 : -1)
+                 setPlayerGameStat(newPlayerStats)
+                //  evaluateQuestionStats(newPlayerStats)
             })
         })
 
@@ -38,7 +40,7 @@ export default function GameResultStats({ questions, sessionId, gameId }) {
 
     useEffect(() => {
         if (playersGameStats.length === 0) return
-        
+        console.log("playersGameStats changed");
         evaluateQuestionStats(playersGameStats)
         return () => {
           
@@ -46,52 +48,59 @@ export default function GameResultStats({ questions, sessionId, gameId }) {
     }, [playersGameStats])
 
     const evaluateQuestionStats = (playersStats) => {
-        console.log('number of playerStats: ', playersStats.length);
-        console.log('questionTimeStats ', questionTimeStats);
+        if (playersStats.length === 0) return
+        let questionStats = getCopy(questionCurrectStats)
+        let timeStats = getCopy(questionTimeStats)
         playersStats.map((value, playerIdx) => {
+          
             value.questionPoints.map((value, questionIdx) => {
                 if (value) {
-
-                     if (questionIdx in questionCurrectStats)
+                     if (questionIdx in questionStats)
                         {
-                                let temp = getCopy(questionCurrectStats)
-                                temp[questionIdx] = temp[questionIdx] + 1
-                                setQuestionCurrectStats(temp) 
+                                let temp = getCopy(questionStats)
+                         temp[questionIdx] = temp[questionIdx] + 1
+                         questionStats = temp
                              }
                         else {
-                                let temp = getCopy(questionCurrectStats)
-                                temp[questionIdx] = 1
-                                setQuestionCurrectStats(temp) 
+                                let temp = getCopy(questionStats)
+                         temp[questionIdx] = 1
+                         questionStats = temp
                     }
                 } else {
-                    if (!(questionIdx in questionCurrectStats)) {
-                         let temp = getCopy(questionCurrectStats)
-                                temp[questionIdx] = 0
-                                setQuestionCurrectStats(temp) 
-                    }
+                    if (!(questionIdx in questionStats)) {
+                         let temp = getCopy(questionStats)
+                        temp[questionIdx] = 0
+                        questionStats = temp
+                    } 
                 }
             })
             // console.log("mapping: ", value.name);
             value.timeTaken.map((value, questionIdx) => {
                 
-                        if (questionIdx in questionTimeStats)
+                        if (questionIdx in timeStats)
                         {
-                                let temp = questionTimeStats
+                                let temp = timeStats
                                 temp[questionIdx] = temp[questionIdx] + value
-                                setQuestionTimeStats(temp) 
+                                timeStats = temp
                              }
                         else {
-                                let temp = questionTimeStats
+                                let temp = timeStats
                                 temp[questionIdx] = value
-                                setQuestionTimeStats(temp) 
+                                timeStats = temp
                               }
             })
-        //    console.log(value.timeTaken);
-        //    console.log(questionTimeStats);
+            
         })
+        setQuestionCurrectStats(questionStats) 
+        setQuestionTimeStats(timeStats) 
         
     }
-
+ useEffect(() => {
+       console.log(questionCurrectStats);
+        return () => {
+          
+        }
+    }, [questionCurrectStats])
     const calculalatePlayerPoint = (playerResult) => new Promise((resolve, reject) => {
         // console.log(playerResult);
         const { name, answers } = playerResult
@@ -181,8 +190,6 @@ export default function GameResultStats({ questions, sessionId, gameId }) {
                         ]
                     }
                 }
-
-                
           options={{
             title:{
               display:true,
