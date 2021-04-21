@@ -24,6 +24,7 @@ import { Home } from "./pages/Home";
 import Play from "./pages/Play";
 import PageNotFound from "./components/PageNotFound";
 import Game from "./pages/Game";
+import UploadGame from "./pages/UploadGame";
 
 function App() {
   console.log(sessionStorage);
@@ -46,13 +47,16 @@ function App() {
           <PrivateRoute exact path="/admin">
             <AdminDashboard />
           </PrivateRoute>
+          <PrivateRoute exact path="/admin/uploadGame">
+            <UploadGame />
+          </PrivateRoute>
           <PrivateRoute exact path="/admin/:gameId">
             <GameDetails />
           </PrivateRoute>
           <PrivateRoute exact path="/admin/:gameId/:quesId">
             <EditQuestion />
           </PrivateRoute>
-          <PrivateRoute path="/admin/session/:quizId/:sessionId/results">
+          <PrivateRoute path="/admin/:gameId/:sessionId/results">
             <Results />
           </PrivateRoute>
           <Route exact path="/play">

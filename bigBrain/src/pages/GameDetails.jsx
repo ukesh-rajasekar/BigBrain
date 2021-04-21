@@ -30,7 +30,6 @@ function GameDetails() {
       if (gameData) {
         setGameData(gameData);
         if (gameData?.questions?.length !== 0) {
-          console.log(getCopy(gameData.questions));
           setnewQuestions(getCopy(gameData.questions));
         }
       }
@@ -91,9 +90,6 @@ function GameDetails() {
       }
     });
   };
-  console.log("gameDetails", gameId);
-  console.log("gameDetails", newQuestions);
-  console.log(gameData);
   if (!gameData) return <PageNotFound />;
   return (
     <div className="gameWrapper">

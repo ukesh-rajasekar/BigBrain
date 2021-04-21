@@ -65,13 +65,12 @@ const getNewObject = (obj) => {
 }
 
 const EditQuestion = (props) => {
-    const {  questionId = 0 } = props
     const { gameId, quesId } = useParams()
     console.log(gameId, quesId);
     const [questionDetails, setQuestionDetails] = useState({})
     const [newDetails, setNewDetails] = useState({})
   const [currentDetails, setCurrentDetails] = useState(
-    getNewObject(defaultDetails)
+    getNewObject({})
   )
 
   // Set the initial value for resetting if needed
@@ -130,6 +129,7 @@ const EditQuestion = (props) => {
         <div className='questionDetails'>
           {/* Generate question inputs as needed */}
           {Object.entries(newDetails).map(([key, value]) => {
+            console.log(key,value);
             return (
               <QuestionInput
                 key={key}
