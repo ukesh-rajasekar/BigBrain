@@ -10,7 +10,7 @@ import {
 import React, { useContext } from "react";
 import { AuthContext, Authenticator } from "./contexts/Auth";
 import Register from "./pages/registration";
-import Login from "./pages/Login";
+import {Login} from "./pages/Login";
 // import {Home} from "./pages/Home";
 import Results from "./pages/Results";
 // import Playjoin from "./pages/Playjoin";

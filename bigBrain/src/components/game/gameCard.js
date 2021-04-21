@@ -5,6 +5,7 @@ import Button from '../button';
 
 function GameCards (props) {
   const { gameData } = props
+   
   const id = gameData.id
     const history = useHistory()
     const {path} = useRouteMatch()
@@ -18,7 +19,7 @@ function GameCards (props) {
                   </div>
                   <div className="detailsWrapper">
                       <div className="titleWrapper">
-                          <h3>{gameData.name}</h3>
+                          <h3 className='game-title'>{gameData.name}</h3>
                       </div>
                       <div className="questionsDetails">
                           <h5>number of questions<span>:{gameData?.questions?.length}</span></h5>

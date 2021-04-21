@@ -51,7 +51,7 @@ const Register = () => {
             handleChange={setStateValue}
           />
           <Button
-            buttonText="Register"
+            buttonText="Signup"
             buttonAction={() => onsubmit(history)}
           />
           <Button

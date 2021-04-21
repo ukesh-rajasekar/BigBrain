@@ -27,16 +27,12 @@ describe('Render Input', () => {
     expect(InputComponent.props().placeholder).toBe(placeholder)
   })
 
-  it('uses custom type of value', () => {
+  it('uses custom type', () => {
     const type = 'password'
     const InputComponent = shallow(<Input type={type}/>);
     expect(InputComponent.props().type).toBe(type)
   })
 
-  it('uses custom type of value', () => {
-    const InputComponent = shallow(<Input/>);
-    expect(InputComponent.props().type).toBe('text')
-  })
 
   it('triggers onChange event handler when clicked', () => {
     const handleChange = jest.fn();
