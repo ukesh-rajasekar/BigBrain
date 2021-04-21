@@ -101,20 +101,18 @@ function GameDetails() {
               <div key={ idx}>
               <GameQuestion
                 key={idx}
-                      question={question}
-                      quesId = {question.id}
-                        index={idx}
+                question={question}
+                quesId={question.id}
+                index={idx}
+                handleDelete={deleteQuestionOfIdx}
                   />
-                   <Button
-        buttonText="Delete question"
-        buttonAction={()=>deleteQuestionOfIdx(idx)}
-                  ></Button>
+                   
                  
             </div>
           );
         })}
         <Button buttonText="Create question" buttonAction={openModal}></Button>
-        <Button buttonText="Delete game" buttonAction={deleteGame}></Button>
+        <Button variant="danger" buttonText="Delete game" buttonAction={deleteGame}></Button>
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}

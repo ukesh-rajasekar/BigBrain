@@ -2,6 +2,7 @@
 
 exports[`Render Input render correctly input component 1`] = `
 <input
+  className="form-control"
   onChange={[Function]}
   type="text"
 />

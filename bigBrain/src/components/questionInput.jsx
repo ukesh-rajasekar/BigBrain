@@ -34,7 +34,7 @@ function QuestionInput (props) {
             type={type}
             onChange={(e) => handleChange(name, e.target.value)}
           />
-          <button onClick={() => reset(name)}>reset</button>
+          {/* <button onClick={() => reset(name)}>reset</button> */}
           <br />
           <br />
         </div>
@@ -63,7 +63,7 @@ function QuestionInput (props) {
               )
             })}
           </select>
-          <button onClick={() => reset(name)}>reset</button>
+          {/* <button onClick={() => reset(name)}>reset</button> */}
           <br />
           <br />
         </div>
@@ -78,7 +78,7 @@ function QuestionInput (props) {
           <br />
           
           <Answer answers={value}  handleChange={(name, ItemValue)=> handleChange(name, ItemValue)} />
-          <button onClick={() => reset(name)}>reset</button>
+          {/* <button onClick={() => reset(name)}>reset</button> */}
           <br />
           <br />
         </div>
@@ -158,7 +158,7 @@ const Answer = ({ answers, handleChange }) => {
   return <div>
     {newAnswers.map((value, idx) => {
       return <div key={ idx}><h3>{value.answer}</h3>
-    <Button buttonText="remove answer" buttonAction={() => handleRemove(idx)} />
+    <Button variant="danger" buttonText="remove answer" buttonAction={() => handleRemove(idx)} />
         <input type="checkbox" name="isCorrectAnswer" checked={value.isCorrectAnswer} onChange={(e)=> handleValueChange("checkbox", [idx, e.target.checked])}/>
       <label htmlFor="isCorrectAnswer"> Is it a right answer?</label><br></br>
       </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useHistory, useRouteMatch } from 'react-router';
 import Button from '../button';
-
+import Card from 'react-bootstrap/Card'
 function GameCards (props) {
   const { gameData } = props
    
@@ -11,26 +11,24 @@ function GameCards (props) {
     const {path} = useRouteMatch()
     console.log(path);
   return (
-        <div className="wrapper">
-          <div className="container">
-              <div className="card">
-                  <div className="thumbnailWrapper">
-                      <img src={base64Example} alt="Game thumbnail"/>
-                  </div>
-                  <div className="detailsWrapper">
-                      <div className="titleWrapper">
-                          <h3 className='game-title'>{gameData.name}</h3>
-                      </div>
-                      <div className="questionsDetails">
-                          <h5>number of questions<span>:{gameData?.questions?.length}</span></h5>
-                          <h5>Time Taken<span>:{gameData?.questions?.length * 50} sec</span></h5>
-                      </div>
-                      <div className="actionButton">
-                          <Button buttonText="Edit Game" buttonAction={() => history.push(`${path}/${id}`)}/>
-                      </div>
-                  </div>
-                </div>
-            </div>
+    <div className="wrapper">
+            <Card style={{ width: '18rem' }}>
+        <Card.Img variant="top" src={base64Example} />
+        <Card.Body>
+          <Card.Title>{gameData.name}</Card.Title>
+          {/* <Card.Text>
+            Some quick example text to build on the card title and make up the bulk of
+            the card's content.
+          </Card.Text> */}
+          <Card.Text>
+            Game no of Questions :{gameData?.questions?.length}
+          </Card.Text>
+          <Card.Text>
+           Approximate time taken to complete is {gameData?.questions?.length * 50} sec
+          </Card.Text>
+          <Button variant="primary" buttonText="Edit Game" buttonAction={() => history.push(`${path}/${id}`)}/>
+        </Card.Body>
+      </Card>
         </div>
   )
 }

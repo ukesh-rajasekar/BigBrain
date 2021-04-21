@@ -4,8 +4,6 @@ import {
   Redirect,
   Route,
   Switch,
-  useHistory,
-  useParams,
 } from "react-router-dom";
 import React, { useContext } from "react";
 import { AuthContext, Authenticator } from "./contexts/Auth";
@@ -17,8 +15,8 @@ import Results from "./pages/Results";
 import AdminDashboard from "./pages/AdminDashboard";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import GameDetails from "./pages/GameDetails";
-import { getQuestionFromIds } from "./services/Admin/gamehelper";
 import EditQuestion from "./components/game/editQuestion";
 import { Home } from "./pages/Home";
 import Play from "./pages/Play";
