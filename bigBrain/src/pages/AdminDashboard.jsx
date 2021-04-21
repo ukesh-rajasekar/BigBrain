@@ -47,14 +47,15 @@ function AdminDashboard(props) {
   return (
     <React.Fragment>
       <Navbar></Navbar>
-          <h1>Dashboard</h1>
+          <h1 className = 'dashboard-title'>Dashboard</h1>
           <div>
               <div>
-        <Button
-          buttonText={!newGame?"create a new game": " Cancel "}
-          buttonAction={() => setNewGame(!newGame)}
-        />
-      </div>
+                <Button
+                  name = 'createGame'
+                  buttonText={!newGame?"create game": " Cancel "}
+                  buttonAction={() => setNewGame(!newGame)}
+                />
+              </div>
 
         {newGame && (
           <Input
@@ -67,7 +68,7 @@ function AdminDashboard(props) {
         )}
       </div>
       <div>
-        {newGame && <Button buttonText="Submit" buttonAction={()=>oncreate(gameObj).then(()=> fetchGames())} />}
+        {newGame && <Button name='confirmGame' buttonText="Submit" buttonAction={()=>oncreate(gameObj).then(()=> fetchGames())} />}
       </div>
       {Object.entries(games).map(([idx,gameData]) => {
             return (

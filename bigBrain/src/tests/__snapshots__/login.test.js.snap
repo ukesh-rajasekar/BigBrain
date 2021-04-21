@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Login render with no props 1`] = `
+<div
+  className="wrapper"
+>
+  <div
+    className="container"
+  >
+    <p
+      className="header"
+    >
+      Welcome
+    </p>
+    <input
+      className="email"
+      name="email"
+      onChange={[Function]}
+      placeholder="Email"
+      type="text"
+    />
+    <input
+      className="password"
+      name="password"
+      onChange={[Function]}
+      placeholder="Password"
+      type="password"
+    />
+    <button
+      onClick={[Function]}
+    >
+      Log In
+    </button>
+    <button
+      onClick={[Function]}
+    >
+      Sign Up
+    </button>
+  </div>
+</div>
+`;

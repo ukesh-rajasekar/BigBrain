@@ -5,8 +5,13 @@ import Input from '../components/Input'
 import Button from '../components/button'
 import { Authenticator } from '../contexts/Auth';
 import { loginAdmin } from "../services/Auth/authServices";
+import showtoast from "../services/toastServices"
 
-const Login = () => {
+export const validateInput = (str = "") => {
+  return str.includes('@');
+}
+
+export const Login = () => {
   const history = useHistory();
     const auth = useContext(Authenticator);
       const [formValues, setForm] = useState({ email: '', password: '' })
@@ -25,6 +30,7 @@ const Login = () => {
     });
   }
 
+  
   return (
     <React.Fragment>
       <div className='wrapper'>
@@ -37,6 +43,7 @@ const Login = () => {
               type='text'
               handleChange={setStateValue}
             />
+            {formValues.email && !validateInput(formValues.email) ? <p>Invalid email !</p> : null}
             <Input
               name='password'
               placeholder='Password'
@@ -45,13 +52,11 @@ const Login = () => {
               handleChange={setStateValue}
             />
             <Button buttonText='Log In' buttonAction={onsubmit} />
-            <Button buttonText='sign Up' buttonAction={() => history.push('/register')} />
+            <Button buttonText='Sign Up' buttonAction={() => history.push('/register')} />
           </div>
         </div>
     </React.Fragment>
   );
 };
 
-
-export default Login
 

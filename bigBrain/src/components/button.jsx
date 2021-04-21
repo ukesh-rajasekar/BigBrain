@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function Button ({ buttonText, buttonAction }) {
+function Button ({ name, buttonText, buttonAction }) {
   return (
-        <button onClick = {buttonAction}>{buttonText}</button>
+        <button name = {name} onClick = {buttonAction}>{buttonText}</button>
   )
 }
 

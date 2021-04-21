@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Button render correctly button component 1`] = `<button />`;
+
+exports[`Render Button render with custom title 1`] = `
+<button>
+  Start
+</button>
+`;
+
+exports[`Render Button render with minimal props 1`] = `<button />`;
+
+exports[`Render Button renders with custom title 1`] = `
+<button>
+  Start
+</button>
+`;
