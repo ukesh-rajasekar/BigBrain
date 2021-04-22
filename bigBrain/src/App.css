@@ -1,7 +1,13 @@
 .App {
   text-align: center;
 }
-
+html,
+body {
+  height: 100%;
+}
+#root {
+  height: 100%;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -37,23 +43,24 @@
   }
 }
 
-.popup-wrapper{
+/* .popup-wrapper {
   background-color: #345aa5;
-    width: 200px;
-    height: 90px;
-    padding: 5px;
+  width: 200px;
+  height: 90px;
+  padding: 5px;
 }
-.popup-content{
+.popup-content {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+} */
+.popup-close-icon {
+position: "abslolute";
+right:0;
+color: red;
 }
-span{
-  margin-left: 185px;
-  font-size: larger;
-  color: red;
-}
-span:hover{
+/* 
+span:hover {
   opacity: 0.5;
-}
+} */

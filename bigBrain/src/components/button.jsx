@@ -1,15 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Button as Btn } from 'react-bootstrap';
 
-function Button ({ buttonText, buttonAction }) {
+function Button ({ name, buttonText, buttonAction, ...rest }) {
   return (
-        <button onClick = {buttonAction}>{buttonText}</button>
+        <Btn size="sm" name = {name} onClick = {buttonAction} {...rest}>{buttonText}  </Btn>
   )
 }
 
 Button.propTypes = {
   buttonText: PropTypes.string,
-  buttonAction: PropTypes.func
+  buttonAction: PropTypes.func,
+  name: PropTypes.string
 }
 
 export default Button

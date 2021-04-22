@@ -1,35 +1,157 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useHistory, useRouteMatch } from 'react-router';
 import Button from '../button';
+import Card from 'react-bootstrap/Card'
+import { ListGroup, ListGroupItem } from 'react-bootstrap'
+import { urls } from '../../constants/urls';
+import { showToast } from '../../services/toastServices';
+import { doGet, doPost } from '../../services/apiRequests';
+import Popup from '../popups';
 
 function GameCards (props) {
   const { gameData } = props
+  const [sessionId, setSessionId] = useState(gameData.active ? gameData.active : null);
+  const [sessionStatus, setSessionStatus] = useState(gameData.active ? 'active' : 'inactive');
+  const [sessionOpen, setSessionOpen] = useState(!!gameData.active);
+  const [totalTime, setTotalTime] = useState(0)
+
   const id = gameData.id
-    const history = useHistory()
-    const {path} = useRouteMatch()
-    console.log(path);
+  const history = useHistory()
+  const { path } = useRouteMatch()
+  console.log(history)
+  useEffect(() => {
+    if (Object.entries(gameData).length === 0) return null
+    console.log(gameData);
+    const timeValues = Object.entries(gameData.questions).map((question, idx) => {
+      return Number(question[1].timeLimit?.value)
+    })
+    const totalTime = timeValues.reduce((a, b) => a + b, 0)
+    console.log(totalTime);
+    setTotalTime(totalTime)
+    return () => {
+    }
+  }, [])
+
+  const onstart = (gameId) => {
+  // setQuizId(gameId)
+    doPost(urls.gameSession + `/${gameId}/start`).then((res) => {
+      if (res.status === 200) {
+        console.log('created');
+        showToast('Game started', 'success');
+        doGet(urls.gameSession + `/${gameId}`).then((res) => {
+          if (res.status === 200) {
+            res.json().then((data) => {
+              setSessionId(data.active);
+              setSessionStatus('active')
+              setSessionOpen(true);
+            });
+          }
+        });
+        setSessionStatus('inactive');
+      } else {
+      // console.log('Invalid request')
+        showToast('Game cannot be created', 'error');
+      }
+    });
+  };
+  const onadvance = (gameId) => {
+    doPost(`${urls.gameSession}/${gameId}/advance`).then((res) => {
+      if (res.status === 200) {
+        console.log('Advancing to next question');
+        showToast('Game Advanced', 'info');
+      } else {
+        showToast('Game Ended', 'info')
+        setSessionStatus('ended');
+      }
+    })
+  }
+  const onend = (gameId) => {
+    doPost(urls.gameSession + `/${gameId}/end`).then((res) => {
+      if (res.status === 200) {
+        console.log('ended');
+        showToast('Game ended', 'success');
+        setSessionStatus('ended');
+      } else {
+      // console.log('Invalid request')
+        setSessionStatus('ended');
+        showToast('You have already ended the game', 'error');
+      }
+    });
+  };
+
+  const gotoresults = (sessionId, quizId) => {
+    history.push(`/admin/${quizId}/${sessionId}/results`);
+  };
   return (
-        <div className="wrapper">
-          <div className="container">
-              <div className="card">
-                  <div className="thumbnailWrapper">
-                      <img src={base64Example} alt="Game thumbnail"/>
-                  </div>
-                  <div className="detailsWrapper">
-                      <div className="titleWrapper">
-                          <h3>{gameData.name}</h3>
-                      </div>
-                      <div className="questionsDetails">
-                          <h5>number of questions<span>:{gameData?.questions?.length}</span></h5>
-                          <h5>Time Taken<span>:{gameData?.questions?.length * 50} sec</span></h5>
-                      </div>
-                      <div className="actionButton">
-                          <Button buttonText="Edit Game" buttonAction={() => history.push(`${path}/${id}`)}/>
-                      </div>
-                  </div>
+    <div className="wrapper">
+            <Card style={{ width: '18rem' }}>
+        <Card.Img style={{ height: 100, width: 100, alignSelf: 'center' }} variant="top" src={base64Example} />
+        <Card.Body>
+          <Card.Title>{gameData.name}</Card.Title>
+          </Card.Body>
+          {/* <Card.Text>
+            Some quick example text to build on the card title and make up the bulk of
+            the card's content.
+          </Card.Text> */}
+          <ListGroup className="list-group-flush">
+    <ListGroupItem>Game no of Questions :{gameData?.questions?.length}</ListGroupItem>
+    <ListGroupItem> Approximate time taken to complete is {totalTime} sec</ListGroupItem>
+  </ListGroup>
+  <Card.Body>
+          <Button variant="primary" buttonText="Edit Game" buttonAction={() => history.push(`${path}/${id}`)}/>
+          </Card.Body>
+          <ListGroup className="list-group-flush">
+    <ListGroupItem>
+      <Button variant="success" name = {gameData.name} buttonText = 'Start game' buttonAction = {() => onstart(gameData.id)} />
+              <Button variant="danger" name = {gameData.name} buttonText = 'End game' buttonAction = {() => onend(gameData.id)} />
+              { sessionStatus === 'active' && <Button buttonText = 'Advance game' buttonAction = {() => onadvance(gameData.id)} />}
+              </ListGroupItem>
+    <ListGroupItem> {sessionStatus === 'active' && sessionOpen && (<Card.Body>
+                <Popup
+                content={() =>
+                  <>
+                    <b>session {sessionId} started</b>
+                    <Button
+                    name = 'copylink'
+                      buttonText="Copy session link"
+                      buttonAction={() =>
+                        navigator.clipboard.writeText(`${sessionId}`)
+                      }
+                    />
+                  </>
+                }
+                handleClose={() => setSessionOpen(false)}
+              />
+               </Card.Body>)}
+               {sessionStatus === 'ended' && sessionOpen && (
+            <Popup
+              content={() =>
+                <div>
+                  <b>Would you like to view the results?</b>
+                  <Button
+                  name='yes'
+                    buttonText="Yes"
+                    buttonAction={() => {
+                      gotoresults(sessionId, gameData.id);
+                    }}
+                  />
+                  <Button
+                  name='no'
+                    buttonText="No"
+                    buttonAction={() => {
+                      setSessionOpen(false);
+                    }}
+                  />
                 </div>
-            </div>
+              }
+              handleClose={() => setSessionOpen(false)}
+            />
+               )}
+          </ListGroupItem>
+  </ListGroup>
+      </Card>
+      <br/>
         </div>
   )
 }

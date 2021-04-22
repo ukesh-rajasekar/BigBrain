@@ -1,7 +1,7 @@
 import { doGet } from '../apiRequests'
 import { urls } from '../../constants/urls'
 
-export const fetchAllGames =  () => {
+export const fetchAllGames = () => {
   return doGet(urls.allGames).then((res) => {
     if (res.status === 200) {
       return res.json()
@@ -17,7 +17,7 @@ export const fetchAllGamesByIds = (ids) => {
   }
   return Promise.allSettled(promises)
 }
-export const fetchQuizData =  (id) => {
+export const fetchQuizData = (id) => {
 //   return Promise.resolve(12)
   return doGet(urls.gameByID + `/${id}`).then((res) => {
     if (res.status === 200) {

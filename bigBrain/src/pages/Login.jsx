@@ -4,18 +4,24 @@ import { useHistory } from 'react-router';
 import Input from '../components/Input'
 import Button from '../components/button'
 import { Authenticator } from '../contexts/Auth';
-import { loginAdmin } from "../services/Auth/authServices";
+import { loginAdmin } from '../services/Auth/authServices';
+import './styles/login.css';
+import { Card, Row, Container, Col } from 'react-bootstrap'
 
-const Login = () => {
+export const validateInput = (str = '') => {
+  return str.includes('@');
+}
+
+export const Login = () => {
   const history = useHistory();
-    const auth = useContext(Authenticator);
-      const [formValues, setForm] = useState({ email: '', password: '' })
-      const setStateValue = (item, value) => {
+  const auth = useContext(Authenticator);
+  const [formValues, setForm] = useState({ email: '', password: '' })
+  const setStateValue = (item, value) => {
     setForm({ ...formValues, [item]: value })
-    }
-    
+  }
+
   const onsubmit = () => {
-  loginAdmin(formValues).then((data) => {
+    loginAdmin(formValues).then((data) => {
       if (data?.token) {
         auth.signIn(data);
         history.push('/admin')
@@ -26,10 +32,13 @@ const Login = () => {
   }
 
   return (
-    <React.Fragment>
-      <div className='wrapper'>
-          <div className='container'>
-            <p className='header'>Welcome</p>
+    <Container fluid="md">
+      <Row className="justify-content-md-center">
+        <Col>
+      <Card className=' text-center'
+        bg={'light'}>
+        <Card.Body className='container'>
+          <Card.Header>Hello BigBrains, please log in</Card.Header>
             <Input
               name='email'
               placeholder='Email'
@@ -37,6 +46,7 @@ const Login = () => {
               type='text'
               handleChange={setStateValue}
             />
+            {formValues.email && !validateInput(formValues.email) ? <p>Invalid email !</p> : null}
             <Input
               name='password'
               placeholder='Password'
@@ -44,14 +54,12 @@ const Login = () => {
               type='password'
               handleChange={setStateValue}
             />
-            <Button buttonText='Log In' buttonAction={onsubmit} />
-            <Button buttonText='sign Up' buttonAction={() => history.push('/register')} />
-          </div>
-        </div>
-    </React.Fragment>
+            <Button name='login' buttonText='Log In' buttonAction={onsubmit} />
+            <Button name='signup' buttonText='Sign Up' buttonAction={() => history.push('/register')} />
+          </Card.Body>
+          </Card >
+          </Col>
+     </Row>
+</Container>
   );
 };
-
-
-export default Login
-

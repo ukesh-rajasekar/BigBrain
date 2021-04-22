@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Login render with no props 1`] = `
+<div
+  className="container-md"
+>
+  <div
+    className="justify-content-md-center row"
+  >
+    <div
+      className="col"
+    >
+      <div
+        className=" text-center card bg-light"
+      >
+        <div
+          className="container card-body"
+        >
+          <div
+            className="card-header"
+          >
+            Hello BigBrains, please log in
+          </div>
+          <input
+            className="email form-control"
+            name="email"
+            onChange={[Function]}
+            placeholder="Email"
+            type="text"
+          />
+          <input
+            className="password form-control"
+            name="password"
+            onChange={[Function]}
+            placeholder="Password"
+            type="password"
+          />
+          <button
+            className="btn btn-primary"
+            disabled={false}
+            name="login"
+            onClick={[Function]}
+            type="button"
+          >
+            Log In
+              
+          </button>
+          <button
+            className="btn btn-primary"
+            disabled={false}
+            name="signup"
+            onClick={[Function]}
+            type="button"
+          >
+            Sign Up
+              
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

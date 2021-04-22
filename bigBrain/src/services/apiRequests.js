@@ -1,4 +1,4 @@
-import {getCopy} from './helpers'
+import { getCopy } from './helpers'
 const HEADER = {
   method: 'GET', // *GET, POST, PUT, DELETE, etc.
   mode: 'cors', // no-cors, *cors, same-origin

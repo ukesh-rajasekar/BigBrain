@@ -1,12 +1,15 @@
-import React, { useContext, useState } from "react";
-import { useHistory } from "react-router";
-import { Authenticator } from "../contexts/Auth";
-import { registerAdmin } from "../services/Auth/authServices";
+import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router';
+import { Authenticator } from '../contexts/Auth';
+import { registerAdmin } from '../services/Auth/authServices';
 import Input from '../components/Input'
 import Button from '../components/button'
+import { Card, Row, Container, Col } from 'react-bootstrap'
+import { showToast } from '../services/toastServices';
+
 const Register = () => {
   const history = useHistory(); // let auth = useAuth();
-  const [formValues, setForm] = useState({ email: "", password: "", name: "" });
+  const [formValues, setForm] = useState({ email: '', password: '', name: '' });
   const auth = useContext(Authenticator);
   console.log(history);
 
@@ -18,17 +21,21 @@ const Register = () => {
     registerAdmin(formValues).then((data) => {
       if (data?.token) {
         auth.signUp(data);
+        showToast('Signed up Successfully', 'success')
         history.push('/admin')
       } else {
-        alert(data.error)
+        showToast('Failed to sign up', 'error')
       }
     });
   };
   return (
-    <React.Fragment>
-      <div className="wrapper">
-        <div className="container">
-          <p className="header">Welcome</p>
+     <Container fluid="md">
+      <Row className="justify-content-md-center">
+        <Col>
+      <Card className=' text-center'
+        bg={'light'}>
+        <Card.Body className='container'>
+          <Card.Header>Welcome to the Club, Please Register</Card.Header>
           <Input
             name="name"
             placeholder="name"
@@ -51,16 +58,18 @@ const Register = () => {
             handleChange={setStateValue}
           />
           <Button
-            buttonText="Register"
+            buttonText="Signup"
             buttonAction={() => onsubmit(history)}
           />
           <Button
             buttonText="Log In"
-            buttonAction={() => history.push("/login")}
+            buttonAction={() => history.push('/login')}
           />
-        </div>
-      </div>
-    </React.Fragment>
+         </Card.Body>
+          </Card >
+          </Col>
+     </Row>
+</Container>
   );
 };
 

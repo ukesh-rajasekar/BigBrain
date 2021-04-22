@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import Button from './button'
 import { showToast } from '../services/toastServices'
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from 'uuid';
 import { getCopy } from '../services/helpers';
 
 // Induvidual input for question deatils
@@ -10,14 +10,13 @@ function QuestionInput (props) {
   const {
     name,
     handleChange,
-    reset,
     type,
     placeholder,
     value,
     questionLabel,
     options,
   } = props
-  console.log((name,value));
+  console.log((name, value));
   switch (type) {
     // Case for normal string inputs
     case 'text': {
@@ -34,7 +33,7 @@ function QuestionInput (props) {
             type={type}
             onChange={(e) => handleChange(name, e.target.value)}
           />
-          <button onClick={() => reset(name)}>reset</button>
+          {/* <button onClick={() => reset(name)}>reset</button> */}
           <br />
           <br />
         </div>
@@ -63,7 +62,7 @@ function QuestionInput (props) {
               )
             })}
           </select>
-          <button onClick={() => reset(name)}>reset</button>
+          {/* <button onClick={() => reset(name)}>reset</button> */}
           <br />
           <br />
         </div>
@@ -76,16 +75,16 @@ function QuestionInput (props) {
             {questionLabel}
           </label>
           <br />
-          
-          <Answer answers={value}  handleChange={(name, ItemValue)=> handleChange(name, ItemValue)} />
-          <button onClick={() => reset(name)}>reset</button>
+
+          <Answer answers={value} handleChange={(name, ItemValue) => handleChange(name, ItemValue)} />
+          {/* <button onClick={() => reset(name)}>reset</button> */}
           <br />
           <br />
         </div>
       )
-      }
-      default:
-          return null
+    }
+    default:
+      return null
   }
 }
 
@@ -96,35 +95,32 @@ QuestionInput.propTypes = {
   type: PropTypes.string,
   title: PropTypes.string,
   questionLabel: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string , PropTypes.array]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   options: PropTypes.array,
+  placeholder: PropTypes.string
 }
 
 export default QuestionInput
 
-
-
 const Answer = ({ answers, handleChange }) => {
-  const [currentAnswers, setcurrentAnswers] = useState(answers)
   const [newAnswers, setnewAnswers] = useState(answers)
-  const [newAnswer, setnewAnswer] = useState("")
-  
-  
+  const [newAnswer, setnewAnswer] = useState('')
+
   useEffect(() => {
     console.log('annswers changed');
-    handleChange('answer',newAnswers)
-    
+    handleChange('answer', newAnswers)
   }, [newAnswers])
-  const handleValueChange = (type,value) => {
+  const handleValueChange = (type, value) => {
+    const [idx, newValue] = value
+    const editedanswers = getCopy(newAnswers)
+
     switch (type) {
-      case "choice":
+      case 'choice':
         setnewAnswer(value)
         break
-      case "checkbox":
+      case 'checkbox':
         console.log(value);
-        const [idx, newValue] = value
-        console.log(idx,Boolean(newValue));
-        const editedanswers = getCopy(newAnswers)
+        console.log(idx, Boolean(newValue));
         editedanswers[idx].isCorrectAnswer = newValue
         setnewAnswers(editedanswers)
         break
@@ -134,19 +130,15 @@ const Answer = ({ answers, handleChange }) => {
   }
 
   const handleAdd = () => {
-    if (newAnswers.length < 6)
-      
-    {
+    if (newAnswers.length < 6) {
       const answerObj = {
         id: uuidv4(),
         answer: newAnswer,
         isCorrectAnswer: false
-    }
+      }
       setnewAnswers([...newAnswers, answerObj])
-      
-
     } else {
-      showToast("maximum allowed number of answers is 6", "error")
+      showToast('maximum allowed number of answers is 6', 'error')
     }
   }
 
@@ -158,18 +150,24 @@ const Answer = ({ answers, handleChange }) => {
   return <div>
     {newAnswers.map((value, idx) => {
       return <div key={ idx}><h3>{value.answer}</h3>
-    <Button buttonText="remove answer" buttonAction={() => handleRemove(idx)} />
-        <input type="checkbox" name="isCorrectAnswer" checked={value.isCorrectAnswer} onChange={(e)=> handleValueChange("checkbox", [idx, e.target.checked])}/>
+    <Button name="removeAnswer" variant="danger" buttonText="remove answer" buttonAction={() => handleRemove(idx)} />
+        <input type="checkbox" name="isCorrectAnswer" checked={value.isCorrectAnswer} onChange={(e) => handleValueChange('checkbox', [idx, e.target.checked])}/>
       <label htmlFor="isCorrectAnswer"> Is it a right answer?</label><br></br>
       </div>
     })}
     <input
+            name="addAnswer"
             placeholder="Enter the answer here"
             value={newAnswer}
             type="text"
-            onChange={(e) => handleValueChange("choice", e.target.value)}
+            onChange={(e) => handleValueChange('choice', e.target.value)}
     />
-    
-    <Button buttonText="Add answer" buttonAction={() => handleAdd()} />
+
+    <Button name="addAnswer" buttonText="Add answer" buttonAction={() => handleAdd()} />
   </div>
+}
+
+Answer.propTypes = {
+  answers: PropTypes.any,
+  handleChange: PropTypes.func
 }

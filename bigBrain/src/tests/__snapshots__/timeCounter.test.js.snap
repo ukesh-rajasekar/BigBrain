@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render showTimer render with minimal props 1`] = `
+<div>
+  NaN
+</div>
+`;
+
+exports[`Render showTimer uses startTime,timeLimit to calculate timeout 1`] = `
+<div>
+  0
+</div>
+`;

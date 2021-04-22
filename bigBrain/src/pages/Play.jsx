@@ -1,22 +1,22 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import Button from '../components/button'
 import Input from '../components/Input'
 
 function Play () {
-    const [playerName, setPlayerName] = useState({ name: 'Guest'})
-    const [sessionId, setSessionId] = useState('')
+  const [playerName, setPlayerName] = useState({ name: 'Guest' })
+  const [sessionId, setSessionId] = useState('')
 
-    const history = useHistory()
-    const {url}= useRouteMatch()
-      const setStateValue = (item, value) => {
-        setPlayerName({ ...playerName, [item]: value })
-    }
+  const history = useHistory()
+  const { url } = useRouteMatch()
+  const setStateValue = (item, value) => {
+    setPlayerName({ ...playerName, [item]: value })
+  }
 
-    const setSessionValue = (item,value) => {
-        setSessionId(value)
-    }
-   
+  const setSessionValue = (item, value) => {
+    setSessionId(value)
+  }
+
   return (
     <React.Fragment>
       <div className='join-wrapper'>
@@ -36,7 +36,7 @@ function Play () {
               type='text'
               handleChange={setStateValue}
             />
-            <Button buttonText='Join game' buttonAction={()=>history.push(`${url}/${playerName.name}/${sessionId}`)} />
+            <Button buttonText='Join game' buttonAction={() => history.push(`${url}/${playerName.name}/${sessionId}`)} />
           </div>
         </div>
     </React.Fragment>
