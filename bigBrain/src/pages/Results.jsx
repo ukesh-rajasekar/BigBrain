@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import GameResultStats from '../components/game/GameResultStats'
+import Navbar from '../components/navBar'
 import { fetchQuizData } from '../services/games/gameService'
 import { getCopy } from '../services/helpers'
 
@@ -46,6 +47,8 @@ export default function Results () {
   }
   return (
     <div>
+      <Navbar></Navbar>
+
       <h3>Result of game {gameId} in current session with ID {sessionId}</h3>
       <GameResultStats questions={questions} sessionId={ sessionId } gameId={ gameId } />
       <h3>Other Sessions</h3>

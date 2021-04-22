@@ -6,6 +6,7 @@ import { getCopy } from '../../services/helpers'
 import { useParams } from 'react-router'
 import { getQuestionFromIds, updateGameQuestionOfId } from '../../services/Admin/gamehelper'
 import { showToast } from '../../services/toastServices'
+import Navbar from '../navBar'
 
 // Generate new deep copy of the object
 const getNewObject = (obj) => {
@@ -70,6 +71,8 @@ const EditQuestion = (props) => {
 
   return (
     <div className='wrapper'>
+      <Navbar></Navbar>
+
       <div className='container'>
 
         <h3>Question Details</h3>

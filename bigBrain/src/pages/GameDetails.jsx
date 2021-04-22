@@ -13,6 +13,7 @@ import Input from '../components/Input';
 import PageNotFound from '../components/PageNotFound';
 import { questionFormat } from '../constants/questionFormat';
 import { v4 as uuidv4 } from 'uuid';
+import Navbar from '../components/navBar';
 
 function GameDetails () {
   console.log('rendering');
@@ -93,7 +94,8 @@ function GameDetails () {
   if (!gameData) return <PageNotFound />;
   return (
     <div className="gameWrapper">
-      {/* GAME details */}
+            <Navbar></Navbar>
+
       <div className="gameContainer">
         <h3>{gameData.name}</h3>
         {newQuestions.map((question, idx) => {

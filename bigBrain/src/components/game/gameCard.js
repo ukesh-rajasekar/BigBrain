@@ -11,9 +11,9 @@ import Popup from '../popups';
 
 function GameCards (props) {
   const { gameData } = props
-  const [sessionId, setSessionId] = useState(null);
-  const [sessionStatus, setSessionStatus] = useState('inactive');
-  const [sessionOpen, setSessionOpen] = useState(false);
+  const [sessionId, setSessionId] = useState(gameData.active ? gameData.active : null);
+  const [sessionStatus, setSessionStatus] = useState(gameData.active ? 'active' : 'inactive');
+  const [sessionOpen, setSessionOpen] = useState(!!gameData.active);
   const [totalTime, setTotalTime] = useState(0)
 
   const id = gameData.id
@@ -112,7 +112,7 @@ function GameCards (props) {
                 <Popup
                 content={() =>
                   <>
-                    <b>ID: {sessionId}</b>
+                    <b>session {sessionId} started</b>
                     <Button
                     name = 'copylink'
                       buttonText="Copy session link"
