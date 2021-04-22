@@ -1,12 +1,12 @@
-context('Log In and Create Game - happy path', () => {
+context('Create-Delete Game - happy path', () => {
     beforeEach(() => {
         cy.visit('localhost:3000/');
     });
 
-    it('Create Game successfully', () => {
+    it('Create, Delete Game successfully', () => {
         const email = 'maximus@prime.com';
         const password = '****';
-        const gameName = 'test game'
+        const gameName = 'test'
 
         
         cy.get('input[name=email]')
@@ -35,11 +35,26 @@ context('Log In and Create Game - happy path', () => {
         cy.get('button[name=confirmGame]')
         .click()
 
-        cy.get('h3')
-        .should('contain', gameName)
+        cy.get('.Toastify__toast-body')
         .then((content) => {
-            expect(content.text()).to.contain(gameName)
+            expect(content.text()).to.contain(`Game ${gameName} created`)
         })
+
+        cy.get('div')
+        .contains(gameName)
+        .siblings('button')
+        .click()
+
+        cy.get('button[name=deleteGame]')
+        .click()
+
+
+
+        cy.get('div')
+        .then((content) => {
+            expect(content.text()).to.not.equal(gameName)
+        })
+
 
         
     })  

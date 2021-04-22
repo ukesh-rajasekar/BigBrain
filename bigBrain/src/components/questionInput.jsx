@@ -158,18 +158,19 @@ const Answer = ({ answers, handleChange }) => {
   return <div>
     {newAnswers.map((value, idx) => {
       return <div key={ idx}><h3>{value.answer}</h3>
-    <Button variant="danger" buttonText="remove answer" buttonAction={() => handleRemove(idx)} />
+    <Button name="removeAnswer" variant="danger" buttonText="remove answer" buttonAction={() => handleRemove(idx)} />
         <input type="checkbox" name="isCorrectAnswer" checked={value.isCorrectAnswer} onChange={(e)=> handleValueChange("checkbox", [idx, e.target.checked])}/>
       <label htmlFor="isCorrectAnswer"> Is it a right answer?</label><br></br>
       </div>
     })}
     <input
+            name="addAnswer"
             placeholder="Enter the answer here"
             value={newAnswer}
             type="text"
             onChange={(e) => handleValueChange("choice", e.target.value)}
     />
     
-    <Button buttonText="Add answer" buttonAction={() => handleAdd()} />
+    <Button name="addAnswer" buttonText="Add answer" buttonAction={() => handleAdd()} />
   </div>
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Container, Row } from "react-bootstrap";
 import Button from "../components/button";
 import GameCards from "../components/game/gameCard";
 import Input from "../components/Input";
@@ -70,11 +71,13 @@ function AdminDashboard(props) {
       <div>
         {newGame && <Button name='confirmGame' buttonText="Submit" buttonAction={()=>oncreate(gameObj).then(()=> fetchGames())} />}
       </div>
+      <Container><Row>
       {Object.entries(games).map(([idx,gameData]) => {
             return (
                 <GameCards key={gameData.id} gameData= {gameData} />
             )
           })}
+          </Row></Container>
     </React.Fragment>
   );
 }

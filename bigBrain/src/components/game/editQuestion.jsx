@@ -5,6 +5,7 @@ import QuestionInput from '../questionInput'
 import { getCopy } from '../../services/helpers'
 import { useParams } from 'react-router'
 import { getQuestionFromIds, updateGameQuestionOfId } from '../../services/Admin/gamehelper'
+import { showToast } from '../../services/toastServices'
 
 const defaultDetails = {
   question: {
@@ -100,6 +101,7 @@ const EditQuestion = (props) => {
     const { min, max } = answer?.constrains?.length
     if (answer.value.length > max || answer.value.length < min) { alert('Answer should be of length between 2 and 6 character') } else {
       saveChanges(newDetails)
+      showToast('Save Success', 'success')
     }
   }
 
@@ -137,7 +139,7 @@ const EditQuestion = (props) => {
               />
             )
           })}
-            <Button buttonText="Save changes" buttonAction={() => handleSave()} />
+            <Button name="save" buttonText="Save changes" buttonAction={() => handleSave()} />
         </div>
       </div>
     </div>

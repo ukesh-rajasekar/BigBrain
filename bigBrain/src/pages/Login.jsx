@@ -55,8 +55,8 @@ export const Login = () => {
               type='password'
               handleChange={setStateValue}
             />
-            <Button buttonText='Log In' buttonAction={onsubmit} />
-            <Button buttonText='Sign Up' buttonAction={() => history.push('/register')} />
+            <Button name='login' buttonText='Log In' buttonAction={onsubmit} />
+            <Button name='signup' buttonText='Sign Up' buttonAction={() => history.push('/register')} />
           </Card.Body>
           </Card >
           </Col>

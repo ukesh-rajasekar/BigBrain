@@ -17,11 +17,13 @@ function GameQuestion(props) {
         <Card.Title>Question {props.index + 1}: {question.value}</Card.Title>
 
                <Button
+               name="editQuestion"
             variant="primary"
         buttonText="Edit question"
         buttonAction={() => editQuestion()}
           ></Button>
           <Button
+          name="deleteQuestion"
         buttonText="Delete question"
                 buttonAction={() => props.handleDelete(props.index)}
                  variant="danger"

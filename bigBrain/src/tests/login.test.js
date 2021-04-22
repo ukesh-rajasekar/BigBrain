@@ -37,31 +37,22 @@ describe('Render Login', () => {
 
     test('validate Log in option is there', () => {
         const LoginComponent = render(<Login/>)
-        // console.log(LoginComponent)
         const text = LoginComponent.getByText('Log In')
         expect(text).toBeInTheDocument;
     });
 
     test('validate Sign Up option is there', () => {
         const LoginComponent = render(<Login/>)
-        // console.log(LoginComponent)
         const text = LoginComponent.getByText('Sign Up')
         expect(text).toBeInTheDocument;
     });
 
     test('validate Email placeholder is there', () => {
         const LoginComponent = render(<Login/>)
-        // console.log(LoginComponent)
         const text = LoginComponent.getByPlaceholderText('Email')
         expect(text).toBeInTheDocument;
     });
 
-    test('validate Email placeholder is there', () => {
-        const LoginComponent = render(<Login/>)
-        // console.log(LoginComponent)
-        const text = LoginComponent.getByPlaceholderText('Email')
-        expect(text).toBeInTheDocument;
-    });
 
     test('email input uses text type', () => {
         const LoginComponent = render(<Login/>)

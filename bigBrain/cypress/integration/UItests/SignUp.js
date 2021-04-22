@@ -4,8 +4,8 @@ context('Sign-Up flow - happy path', () => {
     });
 
     it('Signed up successfully', () => {
-        const name = 'maximus';
-        const email = 'maximus@prime.com';
+        const name = 'ferris bueller';
+        const email = 'ferris@bueller.com';
         const password = '****';
         const title = 'Dashboard'
 
@@ -27,12 +27,11 @@ context('Sign-Up flow - happy path', () => {
         .contains('Signup')
         .click()
 
-        cy.get('h1')
-        .should('have.class', 'dashboard-title')
-        .then((content) => { 
-            expect(content.text()).to.contain(title)
-
+        cy.get('.Toastify__toast-body')
+        .then((content) => {
+            expect(content.text()).to.contain(`Signed up Successfully`)
         })
+      
     })  
 
 

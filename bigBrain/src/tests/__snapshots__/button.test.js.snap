@@ -5,15 +5,7 @@ exports[`Render Button render with minimal props 1`] = `
   className="btn btn-primary"
   disabled={false}
   type="button"
-/>
-`;
-
-exports[`Render Button renders with custom title 1`] = `
-<button
-  className="btn btn-primary"
-  disabled={false}
-  type="button"
 >
-  Start
+    
 </button>
 `;

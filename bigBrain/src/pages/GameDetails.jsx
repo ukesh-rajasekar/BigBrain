@@ -14,6 +14,7 @@ import PageNotFound from "../components/PageNotFound";
 import { questionFormat } from "../constants/questionFormat";
 import { v4 as uuidv4 } from "uuid";
 
+
 function GameDetails() {
   console.log("rendering");
   const { gameId } = useParams();
@@ -111,8 +112,8 @@ function GameDetails() {
             </div>
           );
         })}
-        <Button buttonText="Create question" buttonAction={openModal}></Button>
-        <Button variant="danger" buttonText="Delete game" buttonAction={deleteGame}></Button>
+        <Button name="createQuestion" buttonText="Create question" buttonAction={openModal}></Button>
+        <Button name="deleteGame" variant="danger" buttonText="Delete game" buttonAction={deleteGame}></Button>
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
@@ -139,8 +140,8 @@ function GameDetails() {
               handleChange={handleNewQuestionChange}
             />
           </form>
-          <Button buttonText="Add Question" buttonAction={addQuestion}></Button>
-          <Button buttonText="close" buttonAction={closeModal}></Button>
+          <Button name="addQuestion" buttonText="Add Question" buttonAction={addQuestion}></Button>
+          <Button name="closeQuestion" buttonText="close" buttonAction={closeModal}></Button>
         </Modal>
       </div>
     </div>

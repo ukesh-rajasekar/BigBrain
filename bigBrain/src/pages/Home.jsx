@@ -93,13 +93,6 @@ const fetchGames = () => {
       if (res.status === 200) {
         console.log("ended");
         showToast(`Game ended`, "success");
-        // doPost(urls.gameSession + '997161454').then((res) => {
-        //     if (res.status === 200) {
-        //         res.json().then((data) => {
-        //             alert(data.active)
-        //         })
-        //     }
-        // })
         setSessionStatus(!sessionStatus);
         setSessionOpen(false);
         setSessionClose(true);
@@ -119,26 +112,23 @@ const fetchGames = () => {
   return (
     <React.Fragment>
       <Navbar />
-      <div>
         <div className="gamesWrapper">
-          <div className="gamesContainer">
             {Object.entries(games).map((value) => {
-              return <React.Fragment key={value[1].id}><h3 key={value[0]}>{value[1].name}</h3>
-              <div>{(<Button buttonText = 'Start game' buttonAction = {()=> onstart(value[1].id)} />)}</div>
-              
-        <div>{(<Button buttonText = 'End game' buttonAction = {()=> onend (value[1].id)} />)}</div>
-              </React.Fragment>
-            }) }
-          </div>
-        </div>
+              return (
 
-        <div>
+                <div className="gamesContainer" key={value[1].id}><h3 key={value[0]}>{value[1].name}</h3>
+              <Button name = {value[1].name} buttonText = 'Start game' buttonAction = {()=> onstart(value[1].id)} />
+              <Button name = {value[1].name} buttonText = 'End game' buttonAction = {()=> onend (value[1].id)} />
+              </div> 
+              )
+            })}
           {sessionOpen && (
             <Popup
               content={
                 <>
                   <b>Session {sessionId} Started!!!</b>
                   <Button
+                  name = 'copylink'
                     buttonText="Copy session link"
                     buttonAction={() =>
                       navigator.clipboard.writeText(sessionId)
@@ -159,12 +149,14 @@ const fetchGames = () => {
                 <>
                   <b>Would you like to view the results?</b>
                   <Button
+                  name='yes'
                     buttonText="Yes"
                     buttonAction={() => {
                       gotoresults(sessionId, quizId);
                     }}
                   />
                   <Button
+                  name='no'
                     buttonText="No"
                     buttonAction={() => {
                       setSessionClose(false);
@@ -176,7 +168,6 @@ const fetchGames = () => {
             />
           )}
         </div>
-      </div>
     </React.Fragment>
   );
 };

@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render NvaBar render with min props 1`] = `
+<nav
+  className="navbar navbar-expand navbar-dark bg-primary"
+>
+  <a
+    className="navbar-brand"
+    href="/admin"
+  >
+    Dashboard
+  </a>
+  <div
+    className="mr-auto navbar-nav"
+    onKeyDown={[Function]}
+  >
+    <a
+      className="nav-link"
+      data-rb-event-key="/Home"
+      href="/Home"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+    >
+      Games
+    </a>
+    <a
+      className="nav-link"
+      data-rb-event-key="admin/uploadGame"
+      href="admin/uploadGame"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+    >
+      Upload Game
+    </a>
+  </div>
+  <button
+    className="btn btn-primary"
+    disabled={false}
+    name="logout"
+    onClick={[Function]}
+    type="button"
+  >
+    Log Out
+      
+  </button>
+</nav>
+`;

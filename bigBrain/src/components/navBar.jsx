@@ -15,11 +15,11 @@ function Navbar (props) {
          <N bg="primary" variant="dark">
           <N.Brand href="/admin">Dashboard</N.Brand>
           <Nav className="mr-auto">
-            <Nav.Link href="/Home">Games</Nav.Link>
+            {/* <Nav.Link href="/Home">Games</Nav.Link> */}
         <Nav.Link href="admin/uploadGame">Upload Game</Nav.Link>
           
       </Nav>
-          <Button buttonAction={() => logOut()} buttonText="Log Out" >Submit</Button>
+          <Button name ="logout" buttonAction={() => logOut()} buttonText="Log Out" >Submit</Button>
     
   </N>
   )

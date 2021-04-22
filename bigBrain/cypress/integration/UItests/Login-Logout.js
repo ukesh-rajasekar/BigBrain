@@ -18,7 +18,7 @@ context('Log out and Log in flow - happy path', () => {
         .focus()
         .type(password);
 
-        cy.get('button')
+        cy.get('button[name=login]')
         .contains('Log In')
         .click()
 
@@ -28,8 +28,7 @@ context('Log out and Log in flow - happy path', () => {
             expect(content.text()).to.contain(title)
         })
 
-        cy.get('button')
-        .contains('Logout')
+        cy.get('button[name=logout]')
         .click()
 
         cy.get('button')

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { oncreate } from "../services/Admin/games";
 import {addQuestions} from '../services/Admin/gamehelper'
 import Navbar from "../components/navBar";
+import Card from 'react-bootstrap/Card'
+
 export default function UploadGame() {
   const [gameData, setGameData] = useState({});
   const [quizID, setQuizId] = useState(null);
@@ -43,14 +45,18 @@ export default function UploadGame() {
   return (
     <div>
       <Navbar></Navbar>
-      <h3>upload game</h3>
-      <input
+      <Card>
+  <Card.Header>Upload Your Game here as .JSON file</Card.Header>
+  <Card.Body>
+  <input
         name="GameFile"
         placeholder="GameFile"
         className="GameFile"
         type="file"
         onChange={(e) => setFilePath(e)}
       />
+  </Card.Body>
+</Card>
     </div>
   );
 }

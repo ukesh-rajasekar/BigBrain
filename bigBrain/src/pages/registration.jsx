@@ -5,6 +5,8 @@ import { registerAdmin } from "../services/Auth/authServices";
 import Input from '../components/Input'
 import Button from '../components/button'
 import {Card,Row, Container, Col} from "react-bootstrap"
+import { showToast } from "../services/toastServices";
+
 
 const Register = () => {
   const history = useHistory(); // let auth = useAuth();
@@ -20,9 +22,10 @@ const Register = () => {
     registerAdmin(formValues).then((data) => {
       if (data?.token) {
         auth.signUp(data);
+        showToast('Signed up Successfully', 'success')
         history.push('/admin')
       } else {
-        alert(data.error)
+        showToast('Failed to sign up', 'error')
       }
     });
   };

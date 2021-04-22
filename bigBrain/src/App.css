@@ -43,7 +43,7 @@ body {
   }
 }
 
-.popup-wrapper {
+/* .popup-wrapper {
   background-color: #345aa5;
   width: 200px;
   height: 90px;
@@ -54,12 +54,13 @@ body {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+} */
+.popup-close-icon {
+position: "abslolute";
+right:0;
+color: red;
 }
-span {
-  margin-left: 185px;
-  font-size: larger;
-  color: red;
-}
+/* 
 span:hover {
   opacity: 0.5;
-}
+} */
