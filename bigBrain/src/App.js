@@ -12,7 +12,7 @@ import { Login } from './pages/Login';
 import Results from './pages/Results';
 import AdminDashboard from './pages/AdminDashboard';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'
+import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GameDetails from './pages/GameDetails';
 import EditQuestion from './components/game/editQuestion';
@@ -20,7 +20,9 @@ import Play from './pages/Play';
 import PageNotFound from './components/PageNotFound';
 import Game from './pages/Game';
 import UploadGame from './pages/UploadGame';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import Navbar from './components/navBar';
+import NavbarPlayers from './components/navBarPlayers';
 
 function App () {
   console.log(sessionStorage);
@@ -28,7 +30,7 @@ function App () {
     <AuthContext>
       <Router>
         <Switch>
-        <Route exact path="/">
+          <Route exact path="/">
             <Play />
           </Route>
           <Route path="/login">
@@ -62,17 +64,17 @@ function App () {
             <PageNotFound />
           </Route>
         </Switch>
-         <ToastContainer
-            position='bottom-right'
-            autoClose={2000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
+        <ToastContainer
+          position="bottom-right"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </Router>
     </AuthContext>
   );
@@ -82,6 +84,8 @@ function PrivateRoute ({ children, ...rest }) {
   const auth = useContext(Authenticator);
 
   return (
+    <>
+      {auth.authToken ? <Navbar></Navbar> : <NavbarPlayers></NavbarPlayers>}
     <Route
       {...rest}
       render={({ location }) =>
@@ -98,10 +102,11 @@ function PrivateRoute ({ children, ...rest }) {
           />
             )
       }
-    />
+      />
+      </>
   );
 }
 PrivateRoute.propTypes = {
-  children: PropTypes.any
-}
+  children: PropTypes.any,
+};
 export default App;

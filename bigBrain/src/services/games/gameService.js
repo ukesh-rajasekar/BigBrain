@@ -1,39 +1,39 @@
-import { doGet } from '../apiRequests'
-import { urls } from '../../constants/urls'
+import { doGet } from '../apiRequests';
+import { urls } from '../../constants/urls';
 
 export const fetchAllGames = () => {
   return doGet(urls.allGames).then((res) => {
     if (res.status === 200) {
-      return res.json()
+      return res.json();
     } else {
-      console.error('failed to get games')
+      console.error('failed to get games');
     }
-  })
-}
+  });
+};
 export const fetchAllGamesByIds = (ids) => {
-  const promises = []
+  const promises = [];
   for (const id of ids) {
-    promises.push(fetchQuizData(id))
+    promises.push(fetchQuizData(id));
   }
-  return Promise.allSettled(promises)
-}
+  return Promise.allSettled(promises);
+};
 export const fetchQuizData = (id) => {
-//   return Promise.resolve(12)
+  //   return Promise.resolve(12)
   return doGet(urls.gameByID + `/${id}`).then((res) => {
     if (res.status === 200) {
-      return res.json()
+      return res.json();
     } else {
-      console.error('failed to get game')
+      console.error('failed to get game');
     }
-  })
-}
+  });
+};
 
 export const fetchGameResult = (sessionId) => {
   return doGet(`${urls.gameResults}/${sessionId}/results`).then((res) => {
     if (res.status === 200) {
-      return res.json()
+      return res.json();
     } else {
-      console.error('failed to get games results')
+      console.error('failed to get games results');
     }
-  })
-}
+  });
+};

@@ -8,6 +8,12 @@ body {
 #root {
   height: 100%;
 }
+#root {
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: column;
+  align-items: stretch;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -43,24 +49,22 @@ body {
   }
 }
 
-/* .popup-wrapper {
-  background-color: #345aa5;
-  width: 200px;
-  height: 90px;
-  padding: 5px;
-}
-.popup-content {
+/* .container {
+  height: 100%;
+} */
+
+.gameContainer {
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  flex-flow: column;
   align-items: center;
-} */
-.popup-close-icon {
-position: "abslolute";
-right:0;
-color: red;
 }
-/* 
-span:hover {
-  opacity: 0.5;
-} */
+
+div[class^="container"],
+div[class*="container"] {
+  height: 100%;
+}
+
+.card {
+  margin: 10px;
+}

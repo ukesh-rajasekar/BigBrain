@@ -4,7 +4,7 @@ import { fetchGameResult } from '../../services/games/gameService';
 import { getCopy } from '../../services/helpers';
 import PropTypes from 'prop-types';
 import Button from '../button';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 export default function GameResultStats ({
   questions,
@@ -123,15 +123,15 @@ export default function GameResultStats ({
       });
     });
   return (
-    <div>
-      <h3>Details of session {sessionId}</h3>
+    <Card>
+      <Card.Header>Details of session {sessionId}</Card.Header>
       <Button
         buttonText={showStatus ? 'Hide results' : 'Show results'}
         buttonAction={toggleShowStatus}
       ></Button>
       {showStatus && (
         <div>
-          <h3>LeaderBoard(TOP 5)</h3>
+          <Card.Title style={{ textAlign: 'center' }}>LeaderBoard(TOP 5)</Card.Title>
           <ListGroup>
             {playersGameStats.map((value, idx) => {
               if (idx < 5) {
@@ -225,7 +225,7 @@ export default function GameResultStats ({
           </div>
         </div>
       )}
-    </div>
+    </Card>
   );
 }
 

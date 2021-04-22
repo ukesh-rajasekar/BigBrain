@@ -10,5 +10,5 @@ export function showToast (message, type) {
     pauseOnHover: false,
     draggable: true,
     progress: undefined,
-  })
+  });
 }

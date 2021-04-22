@@ -13,7 +13,6 @@ import Input from '../components/Input';
 import PageNotFound from '../components/PageNotFound';
 import { questionFormat } from '../constants/questionFormat';
 import { v4 as uuidv4 } from 'uuid';
-import Navbar from '../components/navBar';
 
 function GameDetails () {
   const { gameId } = useParams();
@@ -90,26 +89,32 @@ function GameDetails () {
   if (!gameData) return <PageNotFound />;
   return (
     <div className="gameWrapper">
-            <Navbar></Navbar>
-
       <div className="gameContainer">
-        <h3>{gameData.name}</h3>
+        <h3>Game Name: {gameData.name}</h3>
         {newQuestions.map((question, idx) => {
           return (
-              <div key={ idx}>
+            <div key={idx}>
               <GameQuestion
                 key={idx}
                 question={question}
                 quesId={question.id}
                 index={idx}
                 handleDelete={deleteQuestionOfIdx}
-                  />
-
+              />
             </div>
           );
         })}
-        <Button name="createQuestion" buttonText="Create question" buttonAction={openModal}></Button>
-        <Button name="deleteGame" variant="danger" buttonText="Delete game" buttonAction={deleteGame}></Button>
+        <Button
+          name="createQuestion"
+          buttonText="Create question"
+          buttonAction={openModal}
+        ></Button>
+        <Button
+          name="deleteGame"
+          variant="danger"
+          buttonText="Delete game"
+          buttonAction={deleteGame}
+        ></Button>
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
@@ -136,8 +141,16 @@ function GameDetails () {
               handleChange={handleNewQuestionChange}
             />
           </form>
-          <Button name="addQuestion" buttonText="Add Question" buttonAction={addQuestion}></Button>
-          <Button name="closeQuestion" buttonText="close" buttonAction={closeModal}></Button>
+          <Button
+            name="addQuestion"
+            buttonText="Add Question"
+            buttonAction={addQuestion}
+          ></Button>
+          <Button
+            name="closeQuestion"
+            buttonText="close"
+            buttonAction={closeModal}
+          ></Button>
         </Modal>
       </div>
     </div>
