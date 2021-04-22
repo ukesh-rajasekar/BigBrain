@@ -192,7 +192,7 @@ app.get('/', (req, res) => res.redirect('/docs'));
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-const configData = JSON.parse(fs.readFileSync('../frontend/src/config.json'));
+const configData = JSON.parse(fs.readFileSync('../bigBrain/src/config.json'));
 const port = 'BACKEND_PORT' in configData ? configData.BACKEND_PORT : 5000;
 
 const server = app.listen(port, () => {
