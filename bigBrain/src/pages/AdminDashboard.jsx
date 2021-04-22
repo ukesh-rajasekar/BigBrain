@@ -47,6 +47,14 @@ function AdminDashboard (props) {
     fetchGames()
     return () => {};
   }, [gameObj]);
+
+  const deleteGame = (gameid) => {
+    const newGames = games.map((game, idx) => {
+      if (game.id !== gameid) { return game } else return null
+    })
+    console.log(newGames);
+    setGames(newGames)
+  }
   return (
     <React.Fragment>
       <Navbar></Navbar>
@@ -76,7 +84,7 @@ function AdminDashboard (props) {
       <Container><Row>
       {Object.entries(games).map(([idx, gameData]) => {
         return (
-                <GameCards key={gameData.id} gameData= {gameData} />
+          gameData ? <GameCards key={gameData.id} gameData= {gameData} handleDeleteGame={deleteGame} /> : null
         )
       })}
           </Row></Container>

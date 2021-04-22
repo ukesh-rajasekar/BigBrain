@@ -16,7 +16,6 @@ import { v4 as uuidv4 } from 'uuid';
 import Navbar from '../components/navBar';
 
 function GameDetails () {
-  console.log('rendering');
   const { gameId } = useParams();
   const [gameData, setGameData] = useState(null);
   const [name] = useState('');
@@ -53,7 +52,6 @@ function GameDetails () {
   };
   const addQuestion = () => {
     const newQues = getCopy(questionFormat);
-    console.log(uuidv4());
     newQues.id = uuidv4();
     newQues.question.value = newQuestion;
 
@@ -63,8 +61,6 @@ function GameDetails () {
       thumbnail: '',
     }).then((data) => {
       if (JSON.stringify(data) === '{}') {
-        console.log(newQuestions);
-        console.log(newQues);
         setnewQuestions([...newQuestions, newQues]);
       }
     });

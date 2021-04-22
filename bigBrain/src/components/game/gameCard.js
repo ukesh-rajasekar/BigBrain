@@ -8,6 +8,7 @@ import { urls } from '../../constants/urls';
 import { showToast } from '../../services/toastServices';
 import { doGet, doPost } from '../../services/apiRequests';
 import Popup from '../popups';
+import { deleteGameById } from '../../services/Admin/gamehelper';
 
 function GameCards (props) {
   const { gameData } = props
@@ -83,6 +84,14 @@ function GameCards (props) {
   const gotoresults = (sessionId, quizId) => {
     history.push(`/admin/${quizId}/${sessionId}/results`);
   };
+
+  const deleteGame = () => {
+    deleteGameById(gameData.id).then((data) => {
+      if (JSON.stringify(data) === '{}') {
+        props.handleDeleteGame(gameData.id)
+      }
+    });
+  };
   return (
     <div className="wrapper">
             <Card style={{ width: '18rem' }}>
@@ -100,6 +109,7 @@ function GameCards (props) {
   </ListGroup>
   <Card.Body>
           <Button variant="primary" buttonText="Edit Game" buttonAction={() => history.push(`${path}/${id}`)}/>
+          <Button variant="danger" buttonText="Delete Game" buttonAction={() => deleteGame()}/>
           </Card.Body>
           <ListGroup className="list-group-flush">
     <ListGroupItem>
@@ -160,7 +170,8 @@ GameCards.propTypes = {
   index: PropTypes.string,
   gameData: PropTypes.object,
   handleDelete: PropTypes.func,
-  url: PropTypes.string
+  url: PropTypes.string,
+  handleDeleteGame: PropTypes.func
 }
 
 export default GameCards
