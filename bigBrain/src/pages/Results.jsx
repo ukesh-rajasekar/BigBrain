@@ -49,13 +49,12 @@ export default function Results () {
     <div>
       <Navbar></Navbar>
 
-      <h3>Result of game {gameId} in current session with ID {sessionId}</h3>
-      <GameResultStats questions={questions} sessionId={ sessionId } gameId={ gameId } />
+      <GameResultStats questions={questions} sessionId={ sessionId } gameId={ gameId } showStatusDefault={true} />
       <h3>Other Sessions</h3>
       {oldSessions.map((value, idx) => {
         return <div key={idx}>
           <h3>Results For session { value }</h3>
-          <GameResultStats questions={questions} sessionId={ value } gameId={ gameId } />
+          <GameResultStats questions={questions} sessionId={ value } gameId={ gameId } showStatusDefault={true}/>
         </div>
       })}
     </div>

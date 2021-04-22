@@ -2,7 +2,7 @@
 
 exports[`Render Button render with minimal props 1`] = `
 <button
-  className="btn btn-primary"
+  className="btn btn-primary btn-sm"
   disabled={false}
   type="button"
 >

@@ -6,6 +6,7 @@ import Input from '../components/Input'
 import Button from '../components/button'
 import { Card, Row, Container, Col } from 'react-bootstrap'
 import { showToast } from '../services/toastServices';
+import NavbarPlayers from '../components/navBarPlayers';
 
 const Register = () => {
   const history = useHistory(); // let auth = useAuth();
@@ -29,7 +30,9 @@ const Register = () => {
     });
   };
   return (
-     <Container fluid="md">
+    <Container fluid="md">
+        <NavbarPlayers></NavbarPlayers>
+
       <Row className="justify-content-md-center">
         <Col>
       <Card className=' text-center'

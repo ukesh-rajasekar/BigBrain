@@ -29,7 +29,7 @@ function App () {
       <Router>
         <Switch>
         <Route exact path="/">
-            <Login />
+            <Play />
           </Route>
           <Route path="/login">
             <Login />

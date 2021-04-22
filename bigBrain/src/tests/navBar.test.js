@@ -22,19 +22,6 @@ describe('Render NvaBar', () => {
       '/admin')
   });
 
-  test('Go to Games link is there', () => {
-    const NavComponent = render(<Navbar/>)
-    const text = NavComponent.getByText('Games')
-    expect(text).toBeInTheDocument;
-  })
-
-  test('Games routing works', () => {
-    const NavComponent = render(<Navbar/>)
-    const gameRoute = NavComponent.getByText('Games');
-    expect(gameRoute.getAttribute('href')).toBe(
-      '/Home')
-  });
-
   test('Go to UploadGame link is there', () => {
     const NavComponent = render(<Navbar/>)
     const text = NavComponent.getByText('Upload Game')

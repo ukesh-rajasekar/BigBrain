@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import { Col, Container, Row } from 'react-bootstrap'
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import Button from '../components/button'
 import Input from '../components/Input'
+import NavbarPlayers from '../components/navBarPlayers'
 
 function Play () {
   const [playerName, setPlayerName] = useState({ name: 'Guest' })
@@ -19,7 +21,12 @@ function Play () {
 
   return (
     <React.Fragment>
-      <div className='join-wrapper'>
+
+      <Container>
+        <Row>
+          <Col>
+          <div className='join-wrapper'>
+        <NavbarPlayers></NavbarPlayers>
           <div className='join-container'>
             <p className='header'>Join Session</p>
             <Input
@@ -38,7 +45,9 @@ function Play () {
             />
             <Button buttonText='Join game' buttonAction={() => history.push(`${url}/${playerName.name}/${sessionId}`)} />
           </div>
-        </div>
+        </div></Col>
+        </Row>
+      </Container>
     </React.Fragment>
   )
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getCopy } from '../services/helpers';
 import { getPlayerResults } from '../services/Player/playerServices';
 import PropTypes from 'prop-types'
+import NavbarPlayers from '../components/navBarPlayers';
 
 export default function PlayerResult ({ playerId, playerName, points }) {
   const QuestionPoints = getCopy(points)
@@ -37,7 +38,9 @@ export default function PlayerResult ({ playerId, playerName, points }) {
     })
   }
   return (
-        <div>
+    <div>
+        <NavbarPlayers></NavbarPlayers>
+
             <h3>{playerName} Score</h3>
            {playerPoints} Points
            {results.map((result, idx) => {

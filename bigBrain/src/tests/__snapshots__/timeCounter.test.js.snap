@@ -2,12 +2,14 @@
 
 exports[`Render showTimer render with minimal props 1`] = `
 <div>
+  Time Left: 
   NaN
 </div>
 `;
 
 exports[`Render showTimer uses startTime,timeLimit to calculate timeout 1`] = `
 <div>
+  Time Left: 
   0
 </div>
 `;

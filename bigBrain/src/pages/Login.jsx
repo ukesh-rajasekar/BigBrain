@@ -7,6 +7,7 @@ import { Authenticator } from '../contexts/Auth';
 import { loginAdmin } from '../services/Auth/authServices';
 import './styles/login.css';
 import { Card, Row, Container, Col } from 'react-bootstrap'
+import NavbarPlayers from '../components/navBarPlayers';
 
 export const validateInput = (str = '') => {
   return str.includes('@');
@@ -33,6 +34,8 @@ export const Login = () => {
 
   return (
     <Container fluid="md">
+        <NavbarPlayers></NavbarPlayers>
+
       <Row className="justify-content-md-center">
         <Col>
       <Card className=' text-center'

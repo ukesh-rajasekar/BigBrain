@@ -9,7 +9,7 @@ function Button ({ name, buttonText, buttonAction, ...rest }) {
 }
 
 Button.propTypes = {
-  buttonText: PropTypes.string,
+  buttonText: PropTypes.any,
   buttonAction: PropTypes.func,
   name: PropTypes.string
 }

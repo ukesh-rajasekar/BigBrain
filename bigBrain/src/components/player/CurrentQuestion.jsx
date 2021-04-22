@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { PollGetTimeSinceStarted } from '../../services/Player/playerServices'
 import AttemptQuestion from './AttemptQuestion';
 import PropTypes from 'prop-types'
+import { Container, Row, Col } from 'react-bootstrap';
 
 export default function CurrentQuestion ({ playerId, points }) {
   const [question, setQuestion] = useState(null)
@@ -16,9 +17,15 @@ export default function CurrentQuestion ({ playerId, points }) {
     })
   }, [question])
   return (
+    <Container>
+      <Row>
+        <Col>
         <div>
             {question && <AttemptQuestion playerId={playerId} questionData ={question} />}
-        </div>
+          </div>
+        </Col>
+      </Row>
+        </Container>
   )
 }
 

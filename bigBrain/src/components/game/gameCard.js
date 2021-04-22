@@ -108,8 +108,8 @@ function GameCards (props) {
     <ListGroupItem> Approximate time taken to complete is {totalTime} sec</ListGroupItem>
   </ListGroup>
   <Card.Body>
-          <Button variant="primary" buttonText="Edit Game" buttonAction={() => history.push(`${path}/${id}`)}/>
-          <Button variant="danger" buttonText="Delete Game" buttonAction={() => deleteGame()}/>
+          <Button name = {'edit' + gameData.name} variant="primary" buttonText="Edit Game" buttonAction={() => history.push(`${path}/${id}`)}/>
+          <Button name = {gameData.name} variant="danger" buttonText="Delete Game" buttonAction={() => deleteGame()}/>
           </Card.Body>
           <ListGroup className="list-group-flush">
     <ListGroupItem>

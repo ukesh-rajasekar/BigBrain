@@ -36,7 +36,7 @@ exports[`Render Login render with no props 1`] = `
             type="password"
           />
           <button
-            className="btn btn-primary"
+            className="btn btn-primary btn-sm"
             disabled={false}
             name="login"
             onClick={[Function]}
@@ -46,7 +46,7 @@ exports[`Render Login render with no props 1`] = `
               
           </button>
           <button
-            className="btn btn-primary"
+            className="btn btn-primary btn-sm"
             disabled={false}
             name="signup"
             onClick={[Function]}
