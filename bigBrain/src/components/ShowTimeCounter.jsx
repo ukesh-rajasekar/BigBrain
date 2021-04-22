@@ -9,7 +9,7 @@ export default function ShowTimeCounter({startTime, timeLimit, handleTimeout}) {
             const time_now = now.getTime()
             const start = new Date(startTime)
             const time_start = start.getTime() 
-            const time = Math.floor((time_now-time_start)/1000);
+            const time = Math.ceil((time_now-time_start)/1000);
             if((timeLimit - time )< 0){
                 handleTimeout()
                 clearInterval(counter)
@@ -25,7 +25,7 @@ export default function ShowTimeCounter({startTime, timeLimit, handleTimeout}) {
    
     return (
         <div>
-            {timeLimit - count}
+           Time Left: {timeLimit - count}
         </div>
     )
 }

@@ -18,7 +18,6 @@ export default function CurrentQuestion({playerId, points}) {
     }, [question])
     return (
         <div>
-            <h3>Current Question player Id:{playerId}</h3>
             {question &&<AttemptQuestion playerId={playerId} questionData ={question} />}
         </div>
     )

@@ -60,15 +60,14 @@ export default function Game() {
     }, [])
     if(!gameStarted){
         return <div>
-            <h3>Waiting for the game to start</h3>
+            <h3>Welcome {playerName}</h3>
+            <h4>Waiting for the game to start</h4>
         </div>
     } else if (gameEnded) {
         return  <PlayerResult playerId = {playerId} playerName = {playerName} points = {questionPoints}/>
     }
     return (
         <div>
-            <h3>Welcome {playerName},{sessionId}</h3>
-            <h3>Active session: {sessionId}</h3>
             <CurrentQuestion playerId={playerId} points = {points} />
         </div>
     )
