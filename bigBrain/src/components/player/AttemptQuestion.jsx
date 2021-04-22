@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { sendAnswers } from '../../services/Player/playerServices';
 import ShowTimeCounter from '../ShowTimeCounter';
 import ShowAnswers from './ShowAnswers';
@@ -25,10 +25,8 @@ export default function AttemptQuestion ({ playerId, questionData }) {
     });
   };
   return (
-    <Container>
-      <Row>
-        <Col>
-          <Card style={{ width: '18rem' }}>
+
+          <Card >
             <Card.Header>{question.value}</Card.Header>
             <ShowAnswers
               type={type}
@@ -46,9 +44,7 @@ export default function AttemptQuestion ({ playerId, questionData }) {
               />
             </Card.Footer>
           </Card>
-        </Col>
-      </Row>
-    </Container>
+
   );
 }
 

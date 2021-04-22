@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Button from '../components/button';
 import Input from '../components/Input';
 
@@ -9,7 +9,6 @@ function Play () {
   const [sessionId, setSessionId] = useState('');
 
   const history = useHistory();
-  const { url } = useRouteMatch();
   const setStateValue = (item, value) => {
     setPlayerName({ ...playerName, [item]: value });
   };
@@ -43,7 +42,7 @@ function Play () {
                 <Button
                   buttonText="Join game"
                   buttonAction={() =>
-                    history.push(`${url}/${playerName.name}/${sessionId}`)
+                    history.push(`play/${playerName.name}/${sessionId}`)
                   }
                 />
               </div>

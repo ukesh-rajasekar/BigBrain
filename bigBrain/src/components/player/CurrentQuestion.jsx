@@ -19,14 +19,12 @@ export default function CurrentQuestion ({ playerId, points }) {
       });
   }, [question]);
   return (
-    <Container>
-      <Row>
-        <Col>
-          <div>
+    <Container style={{ height: '100%', justifyContent: 'center', alignItems: 'center' }}>
+      <Row style={{ height: '100%', justifyContent: 'center', alignItems: 'center' }}>
+        <Col style={{ justifyContent: 'center', alignItems: 'center' }}>
             {question && (
               <AttemptQuestion playerId={playerId} questionData={question} />
             )}
-          </div>
         </Col>
       </Row>
     </Container>

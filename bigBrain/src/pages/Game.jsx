@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import CurrentQuestion from '../components/player/CurrentQuestion';
 import { getCopy } from '../services/helpers';
@@ -57,10 +58,14 @@ export default function Game () {
   }, []);
   if (!gameStarted) {
     return (
-      <div>
-        <h3>Welcome {playerName}</h3>
-        <h4>Waiting for the game to start</h4>
-      </div>
+      <Container>
+        <Row>
+          <Col>
+            <h3>Welcome {playerName}</h3>
+            <h4>Waiting for the game to start</h4>
+          </Col>
+        </Row>
+      </Container>
     );
   } else if (gameEnded) {
     return (
@@ -72,8 +77,6 @@ export default function Game () {
     );
   }
   return (
-    <div>
       <CurrentQuestion playerId={playerId} points={points} />
-    </div>
   );
 }

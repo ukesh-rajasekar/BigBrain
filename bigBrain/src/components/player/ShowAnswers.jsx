@@ -37,8 +37,9 @@ export default function ShowAnswers ({
       <ListGroup className="list-group-flush">
         {answers.value.map((choice, idx) => {
           return (
-            <ListGroupItem key={idx}>
-              <label htmlFor={idx}>{choice.answer}</label>
+            <ListGroupItem
+              style={{ justifyContent: 'space-around', display: 'flex' }}
+              key={idx}>
               <input
                 disabled={disabled}
                 type="checkbox"
@@ -46,6 +47,8 @@ export default function ShowAnswers ({
                 id={choice.id}
                 onChange={(e) => handleUpdates(e.target.checked, choice.id)}
               ></input>
+              <label>{choice.answer}</label>
+
               {disabled && choice.isCorrectAnswer && (
                 <Badge variant="success">Correct answer</Badge>
               )}
