@@ -19,8 +19,7 @@ function GameCards (props) {
   const id = gameData.id
   const history = useHistory()
   const { path } = useRouteMatch()
-  console.log(path);
-
+  console.log(history)
   useEffect(() => {
     if (Object.entries(gameData).length === 0) return null
     console.log(gameData);
@@ -117,7 +116,7 @@ function GameCards (props) {
                     name = 'copylink'
                       buttonText="Copy session link"
                       buttonAction={() =>
-                        navigator.clipboard.writeText(sessionId)
+                        navigator.clipboard.writeText(`${sessionId}`)
                       }
                     />
                   </>
