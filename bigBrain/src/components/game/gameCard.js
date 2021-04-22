@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { useHistory, useRouteMatch } from 'react-router';
 import Button from '../button';
 import Card from 'react-bootstrap/Card'
-import {ListGroup, ListGroupItem} from 'react-bootstrap'
+import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import { urls } from '../../constants/urls';
 import { showToast } from '../../services/toastServices';
 import { doGet, doPost } from '../../services/apiRequests';
@@ -14,86 +14,80 @@ function GameCards (props) {
   const [sessionId, setSessionId] = useState(null);
   const [sessionStatus, setSessionStatus] = useState('inactive');
   const [sessionOpen, setSessionOpen] = useState(false);
-  const [sessionClose, setSessionClose] = useState(false);
-  const [totalTime, setTotalTime ] = useState(0) 
-   
+  const [totalTime, setTotalTime] = useState(0)
+
   const id = gameData.id
-    const history = useHistory()
-    const {path} = useRouteMatch()
-    console.log(path);
+  const history = useHistory()
+  const { path } = useRouteMatch()
+  console.log(path);
 
-    
-useEffect(() => {
-  if (Object.entries(gameData).length ===0 ) return null
-  console.log(gameData);
-  const timeValues = Object.entries(gameData.questions).map(( question, idx)=> {
-    return Number(question[1].timeLimit?.value)
-  })
-  const totalTime = timeValues.reduce((a,b) => a+b,0)
-  console.log(totalTime);
-  setTotalTime(totalTime)
-  return () => {
-  }
+  useEffect(() => {
+    if (Object.entries(gameData).length === 0) return null
+    console.log(gameData);
+    const timeValues = Object.entries(gameData.questions).map((question, idx) => {
+      return Number(question[1].timeLimit?.value)
+    })
+    const totalTime = timeValues.reduce((a, b) => a + b, 0)
+    console.log(totalTime);
+    setTotalTime(totalTime)
+    return () => {
+    }
+  }, [])
 
-}, [])
-
-const onstart = (gameId) => {
+  const onstart = (gameId) => {
   // setQuizId(gameId)
-  doPost(urls.gameSession + `/${gameId}/start`).then((res) => {
-    if (res.status === 200) {
-      console.log("created");
-      showToast(`Game started`, "success");
-      doGet(urls.gameSession + `/${gameId}`).then((res) => {
-        if (res.status === 200) {
-          res.json().then((data) => {
-            setSessionId(data.active);
-            setSessionStatus("active")
-            setSessionOpen(true);
-          });
-        }
-      });
-      setSessionStatus("inactive");
-    } else {
-      //console.log('Invalid request')
-      showToast("Game cannot be created", "error");
-    }
-  });
-};
-const onadvance = (gameId) => {
-  doPost(`${urls.gameSession}/${gameId}/advance`).then((res)=> {
-    if (res.status === 200) {
-      console.log("Advancing to next question");
-      showToast(`Game Advanced`, "info");
-    } else {
-      showToast('Game Ended', 'info')
-      setSessionStatus("ended");
-      setSessionClose(true);
-    }
-  })
-}
-const onend = (gameId) => {
-  doPost(urls.gameSession + `/${gameId}/end`).then((res) => {
-    if (res.status === 200) {
-      console.log("ended");
-      showToast(`Game ended`, "success");
-      setSessionStatus("ended");
-      setSessionClose(true);
-    } else {
-      //console.log('Invalid request')
-      setSessionStatus("ended");
-      showToast("You have already ended the game", "error");
-    }
-  });
-};
+    doPost(urls.gameSession + `/${gameId}/start`).then((res) => {
+      if (res.status === 200) {
+        console.log('created');
+        showToast('Game started', 'success');
+        doGet(urls.gameSession + `/${gameId}`).then((res) => {
+          if (res.status === 200) {
+            res.json().then((data) => {
+              setSessionId(data.active);
+              setSessionStatus('active')
+              setSessionOpen(true);
+            });
+          }
+        });
+        setSessionStatus('inactive');
+      } else {
+      // console.log('Invalid request')
+        showToast('Game cannot be created', 'error');
+      }
+    });
+  };
+  const onadvance = (gameId) => {
+    doPost(`${urls.gameSession}/${gameId}/advance`).then((res) => {
+      if (res.status === 200) {
+        console.log('Advancing to next question');
+        showToast('Game Advanced', 'info');
+      } else {
+        showToast('Game Ended', 'info')
+        setSessionStatus('ended');
+      }
+    })
+  }
+  const onend = (gameId) => {
+    doPost(urls.gameSession + `/${gameId}/end`).then((res) => {
+      if (res.status === 200) {
+        console.log('ended');
+        showToast('Game ended', 'success');
+        setSessionStatus('ended');
+      } else {
+      // console.log('Invalid request')
+        setSessionStatus('ended');
+        showToast('You have already ended the game', 'error');
+      }
+    });
+  };
 
-const gotoresults = (sessionId, quizId) => {
-  setSessionClose(false);
-  history.push(`/admin/${quizId}/${sessionId}/results`);
-};
+  const gotoresults = (sessionId, quizId) => {
+    history.push(`/admin/${quizId}/${sessionId}/results`);
+  };
   return (
     <div className="wrapper">
             <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={base64Example} />
+        <Card.Img style={{ height: 100, width: 100, alignSelf: 'center' }} variant="top" src={base64Example} />
         <Card.Body>
           <Card.Title>{gameData.name}</Card.Title>
           </Card.Body>
@@ -110,13 +104,13 @@ const gotoresults = (sessionId, quizId) => {
           </Card.Body>
           <ListGroup className="list-group-flush">
     <ListGroupItem>
-      <Button variant="success" name = {gameData.name} buttonText = 'Start game' buttonAction = {()=> onstart(gameData.id)} />
-              <Button variant="danger" name = {gameData.name} buttonText = 'End game' buttonAction = {()=> onend (gameData.id)} />
-              { sessionStatus==="active" && <Button buttonText = 'Advance game' buttonAction = {()=> onadvance(gameData.id)} />}
+      <Button variant="success" name = {gameData.name} buttonText = 'Start game' buttonAction = {() => onstart(gameData.id)} />
+              <Button variant="danger" name = {gameData.name} buttonText = 'End game' buttonAction = {() => onend(gameData.id)} />
+              { sessionStatus === 'active' && <Button buttonText = 'Advance game' buttonAction = {() => onadvance(gameData.id)} />}
               </ListGroupItem>
-    <ListGroupItem> {sessionStatus==="active" && sessionOpen && (<Card.Body>
+    <ListGroupItem> {sessionStatus === 'active' && sessionOpen && (<Card.Body>
                 <Popup
-                content={()=>
+                content={() =>
                   <>
                     <b>ID: {sessionId}</b>
                     <Button
@@ -131,9 +125,9 @@ const gotoresults = (sessionId, quizId) => {
                 handleClose={() => setSessionOpen(false)}
               />
                </Card.Body>)}
-               {sessionStatus==="ended" && sessionOpen && (
+               {sessionStatus === 'ended' && sessionOpen && (
             <Popup
-              content={()=>
+              content={() =>
                 <div>
                   <b>Would you like to view the results?</b>
                   <Button
@@ -152,17 +146,15 @@ const gotoresults = (sessionId, quizId) => {
                   />
                 </div>
               }
-              handleClose={() =>             setSessionOpen(false)}
+              handleClose={() => setSessionOpen(false)}
             />
-          )}
+               )}
           </ListGroupItem>
   </ListGroup>
       </Card>
       <br/>
         </div>
   )
-
-  
 }
 
 GameCards.propTypes = {

@@ -1,30 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
+import React, { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router';
 import {
   deleteGameById,
   updateGameQuestions,
-} from "../services/Admin/gamehelper";
-import { getCopy } from "../services/helpers";
-import GameQuestion from "../components/game/gameQuestions";
-import Modal from "react-modal";
-import { fetchQuizData } from "../services/games/gameService";
-import Button from "../components/button";
-import Input from "../components/Input";
-import PageNotFound from "../components/PageNotFound";
-import { questionFormat } from "../constants/questionFormat";
-import { v4 as uuidv4 } from "uuid";
+} from '../services/Admin/gamehelper';
+import { getCopy } from '../services/helpers';
+import GameQuestion from '../components/game/gameQuestions';
+import Modal from 'react-modal';
+import { fetchQuizData } from '../services/games/gameService';
+import Button from '../components/button';
+import Input from '../components/Input';
+import PageNotFound from '../components/PageNotFound';
+import { questionFormat } from '../constants/questionFormat';
+import { v4 as uuidv4 } from 'uuid';
 
-
-function GameDetails() {
-  console.log("rendering");
+function GameDetails () {
+  console.log('rendering');
   const { gameId } = useParams();
   const [gameData, setGameData] = useState(null);
-  const [name] = useState("");
+  const [name] = useState('');
   const history = useHistory();
   let subtitle;
   const [newQuestions, setnewQuestions] = useState([]);
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  const [newQuestion, setNewQuestion] = useState("");
+  const [newQuestion, setNewQuestion] = useState('');
 
   useEffect(() => {
     fetchQuizData(gameId).then((gameData) => {
@@ -38,21 +37,21 @@ function GameDetails() {
     return () => {};
   }, [gameId]);
 
-  function openModal() {
+  function openModal () {
     setIsOpen(true);
   }
-  function afterOpenModal() {
+  function afterOpenModal () {
     // references are now sync'd and can be accessed.
-    subtitle.style.color = "#f00";
+    subtitle.style.color = '#f00';
   }
-  function closeModal() {
+  function closeModal () {
     setIsOpen(false);
   }
   const handleNewQuestionChange = (item, value) => {
     setNewQuestion(value);
   };
   const addQuestion = () => {
-    let newQues = getCopy(questionFormat);
+    const newQues = getCopy(questionFormat);
     console.log(uuidv4());
     newQues.id = uuidv4();
     newQues.question.value = newQuestion;
@@ -60,9 +59,9 @@ function GameDetails() {
     updateGameQuestions(gameId, {
       questions: [...newQuestions, newQues],
       name: name,
-      thumbnail: "",
+      thumbnail: '',
     }).then((data) => {
-      if (JSON.stringify(data) === "{}") {
+      if (JSON.stringify(data) === '{}') {
         console.log(newQuestions);
         console.log(newQues);
         setnewQuestions([...newQuestions, newQues]);
@@ -76,9 +75,9 @@ function GameDetails() {
     updateGameQuestions(gameId, {
       questions: temp,
       name: name,
-      thumbnail: "",
+      thumbnail: '',
     }).then((data) => {
-      if (JSON.stringify(data) === "{}") {
+      if (JSON.stringify(data) === '{}') {
         setnewQuestions(getCopy(temp));
       }
     });
@@ -86,8 +85,8 @@ function GameDetails() {
 
   const deleteGame = () => {
     deleteGameById(gameId).then((data) => {
-      if (JSON.stringify(data) === "{}") {
-        history.push("/admin");
+      if (JSON.stringify(data) === '{}') {
+        history.push('/admin');
       }
     });
   };
@@ -107,8 +106,7 @@ function GameDetails() {
                 index={idx}
                 handleDelete={deleteQuestionOfIdx}
                   />
-                   
-                 
+
             </div>
           );
         })}
@@ -120,12 +118,12 @@ function GameDetails() {
           onRequestClose={closeModal}
           style={{
             content: {
-              top: "50%",
-              left: "50%",
-              right: "auto",
-              bottom: "auto",
-              marginRight: "-50%",
-              transform: "translate(-50%, -50%)",
+              top: '50%',
+              left: '50%',
+              right: 'auto',
+              bottom: 'auto',
+              marginRight: '-50%',
+              transform: 'translate(-50%, -50%)',
             },
           }}
           contentLabel="Example Modal"

@@ -1,12 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Button from "../button";
-import { useHistory, useRouteMatch } from "react-router";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Button from '../button';
+import { useHistory, useRouteMatch } from 'react-router';
 import Card from 'react-bootstrap/Card'
-function GameQuestion(props) {
-    const { question } = props.question;
-    const {url} = useRouteMatch()
-    const history = useHistory()
+function GameQuestion (props) {
+  const { question } = props.question;
+  const { url } = useRouteMatch()
+  const history = useHistory()
   const editQuestion = () => {
     history.push(`${url}/${props.quesId}`)
   };
@@ -30,15 +30,16 @@ function GameQuestion(props) {
                   ></Button>
       </Card.Body>
     </Card>
-     
+
     </div>
   );
 }
 
 GameQuestion.propTypes = {
-    question: PropTypes.object,
+  question: PropTypes.object,
   quesId: PropTypes.string,
-    handleDelete: PropTypes.func
+  handleDelete: PropTypes.func,
+  index: PropTypes.any
 };
 
 export default GameQuestion;

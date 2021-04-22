@@ -2,8 +2,9 @@ import React, { useContext } from 'react'
 import Button from './button'
 import { showToast } from '../services/toastServices'
 import { Authenticator } from '../contexts/Auth'
-import {Navbar as N,Nav} from 'react-bootstrap'
-
+import { Navbar as N, Nav } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUpload, faHome, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 function Navbar (props) {
   const auth = useContext(Authenticator)
 
@@ -13,14 +14,15 @@ function Navbar (props) {
   }
   return (
          <N bg="primary" variant="dark">
-          <N.Brand href="/admin">Dashboard</N.Brand>
+          <N.Brand href="/admin">Dashboard <FontAwesomeIcon icon={faHome} /></N.Brand>
           <Nav className="mr-auto">
-            {/* <Nav.Link href="/Home">Games</Nav.Link> */}
-        <Nav.Link href="admin/uploadGame">Upload Game</Nav.Link>
-          
+        <Nav.Link href="admin/uploadGame">Upload Game <FontAwesomeIcon icon={faUpload} /></Nav.Link>
+
       </Nav>
-          <Button name ="logout" buttonAction={() => logOut()} buttonText="Log Out" >Submit</Button>
-    
+      <>
+          <Button name ="logout" buttonAction={() => logOut()} buttonText={<>Log Out <FontAwesomeIcon color="white" icon={faSignOutAlt} /></>} > </Button>
+
+      </>
   </N>
   )
 }

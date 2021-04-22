@@ -7,86 +7,33 @@ import { useParams } from 'react-router'
 import { getQuestionFromIds, updateGameQuestionOfId } from '../../services/Admin/gamehelper'
 import { showToast } from '../../services/toastServices'
 
-const defaultDetails = {
-  question: {
-    name: 'question',
-    type: 'text',
-    title: 'How old are you',
-    questionLabel: 'Question',
-    value: '',
-  },
-  type: {
-    name: 'type',
-    type: 'options',
-    title: 'single-choice',
-    questionLabel: 'Choode the type of question',
-    value: '',
-    options: ['single-choice', 'multiple-choice'],
-  },
-  timeLimit: {
-    name: 'timeLimit',
-    type: 'text',
-    title: '10000',
-    questionLabel: 'Enter the time limit',
-    value: '',
-  },
-  points: {
-    name: 'points',
-    type: 'text',
-    title: '50',
-    questionLabel: 'Enter the point',
-    value: '',
-  },
-  url: {
-    name: 'url',
-    type: 'text',
-    title: '',
-    questionLabel: 'Enter the youtube UR',
-    value: '',
-  },
-  answer: {
-    name: 'answer',
-    type: 'options',
-    title: '',
-      questionLabel: 'Enter the answer',
-    options: ['single-choice', 'multiple-choice'],
-    value: '',
-    constrains: {
-      length: {
-        min: 2,
-        max: 6
-      }
-    }
-  },
-}
-
 // Generate new deep copy of the object
 const getNewObject = (obj) => {
   return JSON.parse(JSON.stringify(obj))
 }
 
 const EditQuestion = (props) => {
-    const { gameId, quesId } = useParams()
-    console.log(gameId, quesId);
-    const [questionDetails, setQuestionDetails] = useState({})
-    const [newDetails, setNewDetails] = useState({})
+  const { gameId, quesId } = useParams()
+  console.log(gameId, quesId);
+  const [questionDetails, setQuestionDetails] = useState({})
+  const [newDetails, setNewDetails] = useState({})
   const [currentDetails, setCurrentDetails] = useState(
     getNewObject({})
   )
 
   // Set the initial value for resetting if needed
-    useEffect(() => {
-      getQuestionFromIds(gameId, quesId).then((value) => {
-          console.log(value);
-          setQuestionDetails(getCopy(value))
-          setNewDetails(getCopy(value))
-  })
+  useEffect(() => {
+    getQuestionFromIds(gameId, quesId).then((value) => {
+      console.log(value);
+      setQuestionDetails(getCopy(value))
+      setNewDetails(getCopy(value))
+    })
     setCurrentDetails(Object.assign({}, questionDetails))
-  }, [gameId,quesId])
+  }, [gameId, quesId])
 
   // Update the details when user chages the values
-    const handleChange = (item, value) => {
-      console.log(item,value);
+  const handleChange = (item, value) => {
+    console.log(item, value);
     const tempDetails = getCopy(newDetails)
     if (tempDetails[item]?.constrains?.length) {
       const { max } = tempDetails[item]?.constrains?.length
@@ -105,17 +52,17 @@ const EditQuestion = (props) => {
     }
   }
 
-    const saveChanges = (data) => {
-        updateGameQuestionOfId(gameId, quesId, data).then((data) => {
-          console.log(data);
-      })
+  const saveChanges = (data) => {
+    updateGameQuestionOfId(gameId, quesId, data).then((data) => {
+      console.log(data);
+    })
     console.log('save changes', data);
     return null
   }
 
   // Reset the item specified
-    const reset = (item) => {
-      console.log(item)
+  const reset = (item) => {
+    console.log(item)
     const tempDetails = { ...newDetails }
     tempDetails[item].value = currentDetails[item].value
     setNewDetails({ ...getNewObject(tempDetails) })
@@ -124,12 +71,12 @@ const EditQuestion = (props) => {
   return (
     <div className='wrapper'>
       <div className='container'>
-       
+
         <h3>Question Details</h3>
         <div className='questionDetails'>
           {/* Generate question inputs as needed */}
           {Object.entries(newDetails).map(([key, value]) => {
-            console.log(key,value);
+            console.log(key, value);
             return (
               <QuestionInput
                 key={key}

@@ -1,16 +1,13 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react';
-import { shallow, configure, mount } from 'enzyme';
+import { shallow, configure } from 'enzyme';
 import renderer from 'react-test-renderer';
 import Input from '../components/Input';
 import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
-
-
 describe('Render Input', () => {
-  it('render correctly input component', () => {  
+  it('render correctly input component', () => {
     const InputComponent = renderer.create(<Input />).toJSON();
     expect(InputComponent).toMatchSnapshot();
   });
@@ -33,14 +30,9 @@ describe('Render Input', () => {
     expect(InputComponent.props().type).toBe(type)
   })
 
-
   it('triggers onChange event handler when clicked', () => {
     const handleChange = jest.fn();
     shallow(<Input handleChange={handleChange}/>).simulate('change', { target: { name: 'email', value: 'a@b.com' } });
     expect(handleChange).toHaveBeenCalledTimes(1);
   })
- 
-
-
-
-  });
+});

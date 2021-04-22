@@ -1,30 +1,28 @@
-import "./App.css";
+import './App.css';
 import {
   BrowserRouter as Router,
   Redirect,
   Route,
   Switch,
-} from "react-router-dom";
-import React, { useContext } from "react";
-import { AuthContext, Authenticator } from "./contexts/Auth";
-import Register from "./pages/registration";
-import {Login} from "./pages/Login";
-// import {Home} from "./pages/Home";
-import Results from "./pages/Results";
-// import Playjoin from "./pages/Playjoin";
-import AdminDashboard from "./pages/AdminDashboard";
-import { ToastContainer } from "react-toastify";
+} from 'react-router-dom';
+import React, { useContext } from 'react';
+import { AuthContext, Authenticator } from './contexts/Auth';
+import Register from './pages/registration';
+import { Login } from './pages/Login';
+import Results from './pages/Results';
+import AdminDashboard from './pages/AdminDashboard';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import GameDetails from "./pages/GameDetails";
-import EditQuestion from "./components/game/editQuestion";
-import { Home } from "./pages/Home";
-import Play from "./pages/Play";
-import PageNotFound from "./components/PageNotFound";
-import Game from "./pages/Game";
-import UploadGame from "./pages/UploadGame";
+import GameDetails from './pages/GameDetails';
+import EditQuestion from './components/game/editQuestion';
+import Play from './pages/Play';
+import PageNotFound from './components/PageNotFound';
+import Game from './pages/Game';
+import UploadGame from './pages/UploadGame';
+import PropTypes from 'prop-types'
 
-function App() {
+function App () {
   console.log(sessionStorage);
   return (
     <AuthContext>
@@ -39,9 +37,6 @@ function App() {
           <Route path="/register">
             <Register />
           </Route>
-          {/* <Route exact path="/home">
-            <Home />
-          </Route> */}
           <PrivateRoute exact path="/admin">
             <AdminDashboard />
           </PrivateRoute>
@@ -82,49 +77,31 @@ function App() {
     </AuthContext>
   );
 }
-const PlayerResult = () => {
-  return (
-    <React.Fragment>
-      <h1>PlayerResult </h1>
-    </React.Fragment>
-  );
-};
 
-
-
-// const QuestionDetails = () => {
-//   const history = useHistory(); // let auth = useAuth();
-//   const params = useParams()
-//   console.log(params);
-  
-//   return (
-//     <React.Fragment>
-//       <h1>QuestionDetails</h1>
-//       <button onClick={() => history.push("/login")}> HI</button>
-//     </React.Fragment>
-//   );
-// };
-
-function PrivateRoute({ children, ...rest }) {
+function PrivateRoute ({ children, ...rest }) {
   const auth = useContext(Authenticator);
 
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        auth.authToken ? (
-          children
-        ) : (
+        auth.authToken
+          ? (
+              children
+            )
+          : (
           <Redirect
             to={{
-              pathname: "/login",
+              pathname: '/login',
               state: { from: location },
             }}
           />
-        )
+            )
       }
     />
   );
 }
-
+PrivateRoute.propTypes = {
+  children: PropTypes.any
+}
 export default App;

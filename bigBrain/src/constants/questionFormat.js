@@ -1,7 +1,7 @@
 
 export const questionFormat = {
-    id:0,
-    question: {
+  id: 0,
+  question: {
     name: 'question',
     type: 'text',
     placeholder: 'Enter a Question',

@@ -1,28 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { Container, Row } from "react-bootstrap";
-import Button from "../components/button";
-import GameCards from "../components/game/gameCard";
-import Input from "../components/Input";
-import Navbar from "../components/navBar";
-import { oncreate } from "../services/Admin/games";
+import React, { useEffect, useState } from 'react';
+import { Container, Row } from 'react-bootstrap';
+import Button from '../components/button';
+import GameCards from '../components/game/gameCard';
+import Input from '../components/Input';
+import Navbar from '../components/navBar';
+import { oncreate } from '../services/Admin/games';
 import {
   fetchAllGames,
   fetchAllGamesByIds,
-} from "../services/games/gameService";
-function AdminDashboard(props) {
-    const [games, setGames] = useState({});
-  const [gameObj, setGameObj] = useState({ name: "" });
+} from '../services/games/gameService';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
+function AdminDashboard (props) {
+  const [games, setGames] = useState({});
+  const [gameObj, setGameObj] = useState({ name: '' });
 
   const [newGame, setNewGame] = useState(false);
-    
+
   const fetchGames = () => {
-      fetchAllGames().then((data) => {
-        if(!data) return
+    fetchAllGames().then((data) => {
+      if (!data) return
       const ids = [];
       for (const quiz of data?.quizzes) {
         ids.push(quiz.id);
-        }
-        if (ids.length === 0) return
+      }
+      if (ids.length === 0) return
       fetchAllGamesByIds(ids).then((values) => {
         const games = [];
         let count = 0;
@@ -36,13 +38,13 @@ function AdminDashboard(props) {
       })
     })
   };
-    const setStateValue = (item, value) => {
-        console.log(item,value);
+  const setStateValue = (item, value) => {
+    console.log(item, value);
     setGameObj({ ...gameObj, [item]: value });
   };
 
   useEffect(() => {
-      fetchGames()
+    fetchGames()
     return () => {};
   }, [gameObj]);
   return (
@@ -53,7 +55,7 @@ function AdminDashboard(props) {
               <div>
                 <Button
                   name = 'createGame'
-                  buttonText={!newGame?"create game": " Cancel "}
+                  buttonText={!newGame ? <>Create Game <FontAwesomeIcon color="white" icon={faPlusCircle} /></> : ' Cancel '}
                   buttonAction={() => setNewGame(!newGame)}
                 />
               </div>
@@ -69,14 +71,14 @@ function AdminDashboard(props) {
         )}
       </div>
       <div>
-        {newGame && <Button name='confirmGame' buttonText="Submit" buttonAction={()=>oncreate(gameObj).then(()=> fetchGames())} />}
+        {newGame && <Button name='confirmGame' buttonText="Submit" buttonAction={() => oncreate(gameObj).then(() => fetchGames())} />}
       </div>
       <Container><Row>
-      {Object.entries(games).map(([idx,gameData]) => {
-            return (
+      {Object.entries(games).map(([idx, gameData]) => {
+        return (
                 <GameCards key={gameData.id} gameData= {gameData} />
-            )
-          })}
+        )
+      })}
           </Row></Container>
     </React.Fragment>
   );
