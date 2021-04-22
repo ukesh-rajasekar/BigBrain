@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useHistory, useRouteMatch } from 'react-router';
 import Button from '../button';
@@ -15,6 +15,7 @@ function GameCards (props) {
   const [sessionStatus, setSessionStatus] = useState('inactive');
   const [sessionOpen, setSessionOpen] = useState(false);
   const [sessionClose, setSessionClose] = useState(false);
+  const [totalTime, setTotalTime ] = useState(0) 
    
   const id = gameData.id
     const history = useHistory()
@@ -22,7 +23,19 @@ function GameCards (props) {
     console.log(path);
 
     
+useEffect(() => {
+  if (Object.entries(gameData).length ===0 ) return null
+  console.log(gameData);
+  const timeValues = Object.entries(gameData.questions).map(( question, idx)=> {
+    return Number(question[1].timeLimit?.value)
+  })
+  const totalTime = timeValues.reduce((a,b) => a+b,0)
+  console.log(totalTime);
+  setTotalTime(totalTime)
+  return () => {
+  }
 
+}, [])
 
 const onstart = (gameId) => {
   // setQuizId(gameId)
@@ -90,12 +103,11 @@ const gotoresults = (sessionId, quizId) => {
           </Card.Text> */}
           <ListGroup className="list-group-flush">
     <ListGroupItem>Game no of Questions :{gameData?.questions?.length}</ListGroupItem>
-    <ListGroupItem> Approximate time taken to complete is {gameData?.questions?.length * 50} sec</ListGroupItem>
+    <ListGroupItem> Approximate time taken to complete is {totalTime} sec</ListGroupItem>
   </ListGroup>
   <Card.Body>
           <Button variant="primary" buttonText="Edit Game" buttonAction={() => history.push(`${path}/${id}`)}/>
           </Card.Body>
-          <Card.Body>
           <ListGroup className="list-group-flush">
     <ListGroupItem>
       <Button variant="success" name = {gameData.name} buttonText = 'Start game' buttonAction = {()=> onstart(gameData.id)} />
@@ -145,7 +157,6 @@ const gotoresults = (sessionId, quizId) => {
           )}
           </ListGroupItem>
   </ListGroup>
-          </Card.Body>
       </Card>
       <br/>
         </div>
