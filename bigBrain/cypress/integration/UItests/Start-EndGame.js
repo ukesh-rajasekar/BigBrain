@@ -1,6 +1,6 @@
 context('Start game, Stop game, See Results page - happy path', () => {
   beforeEach(() => {
-    cy.visit('localhost:3000/');
+    cy.visit('localhost:3000/login');
   });
 
   it('Start, Stop, See Results successfully', () => {
@@ -58,7 +58,7 @@ context('Start game, Stop game, See Results page - happy path', () => {
       .click()
     Cypress.config('defaultCommandTimeout', 1000);
 
-    cy.get('h3').then((content) => {
+    cy.get('div').then((content) => {
       expect(content.text()).to.contain('LeaderBoard(TOP 5)')
     })
   })

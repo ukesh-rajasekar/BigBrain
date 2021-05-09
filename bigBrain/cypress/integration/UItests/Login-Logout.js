@@ -1,6 +1,6 @@
 context('Log out and Log in flow - happy path', () => {
   beforeEach(() => {
-    cy.visit('localhost:3000/');
+    cy.visit('localhost:3000/login');
   });
 
   it('Log in and Log out successfully', () => {

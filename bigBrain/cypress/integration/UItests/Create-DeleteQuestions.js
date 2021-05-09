@@ -1,6 +1,6 @@
 context('Create and Delete a game questions - happy path', () => {
   beforeEach(() => {
-    cy.visit('localhost:3000/');
+    cy.visit('localhost:3000/login');
   });
 
   it('Questions created and deleted successfully', () => {

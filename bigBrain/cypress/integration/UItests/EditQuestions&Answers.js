@@ -1,6 +1,6 @@
 context('Edit a Question and add answers- happy path', () => {
   beforeEach(() => {
-    cy.visit('localhost:3000/');
+    cy.visit('localhost:3000/login');
   });
 
   it('Questions and Answers edited successfully', () => {
